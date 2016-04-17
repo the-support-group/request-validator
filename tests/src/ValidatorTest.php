@@ -1,6 +1,6 @@
 <?php
 
-use TheSupportGroup\Validator\Validator;
+use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
 
 class ValidatorTest extends PHPUnit_Framework_TestCase
 {
@@ -9,24 +9,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        // $config = require dirname(__DIR__).'/config/database.php';
-
-        // V::setDataProvider('Progsmile\Validator\DbProviders\PdoAdapter');
-
-        // try {
-        //     V::setupPDO(
-        //         'mysql:'.
-        //             "host={$config['host']};".
-        //             "dbname={$config['dbname']};".
-        //             'charset=utf8',
-
-        //         $config['username'],
-        //         $config['password']
-        //     );
-        // } catch (\Exception $e) {
-        //     $this->markTestSkipped($e->getMessage());
-        // }
-
         $this->postData = [
             'firstname'       => 'Denis',
             'lastname'        => 'Klimenko',
@@ -64,21 +46,28 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
             'age.in' => 'this is so wrong'
         ];
 
-        $validator = new Validator(
-            $inputData,
-            $rules,
-            $errorMessages
+        $validateable = $this->getMockBuilder(Respect\Validation\Validatable::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $validationProviderMock = $this->getMockBuilder(ValidationProviderInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $validationProviderMock->expects($this->any())
+            ->method('rule')
+            ->will($this->returnValue($validationProviderMock));
+
+        $validationProviderMock->expects($this->any())
+            ->method('validate')
+            ->will($this->returnValue($validateable));
+
+        $validationFacade = new TheSupportGroup\Validator\Helpers\ValidatorFacade(
+            $validationProviderMock
         );
 
-        $validationResult = $validator->validate();
-
-        // $validationResult = $validator
-        //     ->setRules($rules)
-        //     ->setInputData($inputData)
-        //     ->setErrorMessages($errorMessages)
-        //     ->validate();
-
-        print_r($validationResult->messages());
+        $validator = $validationFacade->validate($inputData, $rules, $errorMessages);
+        print_r($validator->getErrorMessages());
     }
 
     // public function testValidationOK()

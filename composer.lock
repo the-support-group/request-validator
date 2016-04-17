@@ -4,72 +4,41 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e900c6ec4f83427e6f2338e905419e34",
-    "content-hash": "3b9c16cd73f8c00a0c0d87fcf615d4d1",
+    "hash": "79d29f6ef88e2ff5d14b91050c5a48f6",
+    "content-hash": "b879a8ec3f23383eb4fc6427ca535575",
     "packages": [
         {
-            "name": "respect/validation",
-            "version": "1.0.5",
+            "name": "the-support-group/validator-interop",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Respect/Validation.git",
-                "reference": "294368294f9cd207f81474bab27d99875a19ac55"
+                "url": "https://github.com/the-support-group/validation-interop.git",
+                "reference": "38f236ee9ba812610ce0abf307910cead8cc962a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Respect/Validation/zipball/294368294f9cd207f81474bab27d99875a19ac55",
-                "reference": "294368294f9cd207f81474bab27d99875a19ac55",
+                "url": "https://api.github.com/repos/the-support-group/validation-interop/zipball/38f236ee9ba812610ce0abf307910cead8cc962a",
+                "reference": "38f236ee9ba812610ce0abf307910cead8cc962a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4"
-            },
-            "require-dev": {
-                "egulias/email-validator": "~1.2",
-                "malkusch/bav": "~1.0",
-                "mikey179/vfsstream": "^1.5",
-                "phpunit/phpunit": "~4.0",
-                "symfony/validator": "~2.6.9",
-                "zendframework/zend-validator": "~2.3"
-            },
-            "suggest": {
-                "egulias/email-validator": "Strict (RFC compliant) email validation",
-                "ext-bcmath": "Arbitrary Precision Mathematics",
-                "ext-mbstring": "Multibyte String Functions",
-                "fabpot/php-cs-fixer": "Fix PSR2 and other coding style issues",
-                "malkusch/bav": "German bank account validation",
-                "symfony/validator": "Use Symfony validator through Respect\\Validation",
-                "zendframework/zend-validator": "Use Zend Framework validator through Respect\\Validation"
+                "php": ">=5.5.0"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
-                    "Respect\\Validation\\": "library/"
+                    "TheSupportGroup\\Common\\ValidationInterop\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD Style"
-            ],
             "authors": [
                 {
-                    "name": "Respect/Validation Contributors",
-                    "homepage": "https://github.com/Respect/Validation/graphs/contributors"
+                    "name": "Abdul Wahab Qureshi",
+                    "email": "abdul@easyfundraising.org.uk"
                 }
             ],
-            "description": "The most awesome validation engine ever created for PHP",
-            "homepage": "http://respect.li",
-            "keywords": [
-                "respect",
-                "validation",
-                "validator"
-            ],
-            "time": "2016-03-31 17:39:15"
+            "description": "PHP validation interface provider",
+            "time": "2016-04-17 16:24:08"
         }
     ],
     "packages-dev": [
@@ -607,6 +576,70 @@
             "time": "2015-10-02 06:51:40"
         },
         {
+            "name": "respect/validation",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Respect/Validation.git",
+                "reference": "294368294f9cd207f81474bab27d99875a19ac55"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Respect/Validation/zipball/294368294f9cd207f81474bab27d99875a19ac55",
+                "reference": "294368294f9cd207f81474bab27d99875a19ac55",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "egulias/email-validator": "~1.2",
+                "malkusch/bav": "~1.0",
+                "mikey179/vfsstream": "^1.5",
+                "phpunit/phpunit": "~4.0",
+                "symfony/validator": "~2.6.9",
+                "zendframework/zend-validator": "~2.3"
+            },
+            "suggest": {
+                "egulias/email-validator": "Strict (RFC compliant) email validation",
+                "ext-bcmath": "Arbitrary Precision Mathematics",
+                "ext-mbstring": "Multibyte String Functions",
+                "fabpot/php-cs-fixer": "Fix PSR2 and other coding style issues",
+                "malkusch/bav": "German bank account validation",
+                "symfony/validator": "Use Symfony validator through Respect\\Validation",
+                "zendframework/zend-validator": "Use Zend Framework validator through Respect\\Validation"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Respect\\Validation\\": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD Style"
+            ],
+            "authors": [
+                {
+                    "name": "Respect/Validation Contributors",
+                    "homepage": "https://github.com/Respect/Validation/graphs/contributors"
+                }
+            ],
+            "description": "The most awesome validation engine ever created for PHP",
+            "homepage": "http://respect.li",
+            "keywords": [
+                "respect",
+                "validation",
+                "validator"
+            ],
+            "time": "2016-03-31 17:39:15"
+        },
+        {
             "name": "sebastian/comparator",
             "version": "1.2.0",
             "source": {
@@ -1029,7 +1062,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "the-support-group/validator-interop": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

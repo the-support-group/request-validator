@@ -3,6 +3,7 @@
 namespace TheSupportGroup\Validator\Tests\Rules;
 
 use PHPUnit_Framework_TestCase;
+use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
 
 class RulesTest extends PHPUnit_Framework_TestCase
 {
@@ -14,12 +15,16 @@ class RulesTest extends PHPUnit_Framework_TestCase
 
         $files = scandir($rulesDir);
         $filesToProcess = array_diff($files, ['.', '..', 'BaseRule.php']);
+        $validationProviderMock = $this->getMockBuilder(ValidationProviderInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         foreach ($filesToProcess as $file) {
             $class = basename($file, '.php');
 
             $qualifiedClassNamespace = $namespace . $class;
-            $rule = new $qualifiedClassNamespace($ruleConfig);
+
+            $rule = new $qualifiedClassNamespace($ruleConfig, $validationProviderMock);
 
             // Check that these methods exist on these rules.
             $this->assertTrue(method_exists($rule, 'isValid'));

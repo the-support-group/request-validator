@@ -2,6 +2,7 @@
 
 namespace TheSupportGroup\Validator;
 
+use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
 use TheSupportGroup\Validator\Helpers\RulesFactory;
 use TheSupportGroup\Validator\Helpers\ValidatorFacade;
 use TheSupportGroup\Validator\Rules\BaseRule;
@@ -37,32 +38,50 @@ final class Validator
      */
     private static $config = [];
 
-    public function __construct(array $inputData, array $rules = [], array $errorMessages = [])
-    {
+    /**
+     * @param array $inputData
+     * @param array $rules
+     * @param array $errorMessages
+     */
+    public function __construct(
+        ValidationProviderInterface $validationProvider,
+        array $inputData,
+        array $rules = [],
+        array $errorMessages = []
+    ) {
         $this->rules = $rules;
         $this->errorMessages = $errorMessages;
         $this->inputData = $inputData;
+        $this->validationProvider = $validationProvider;
     }
 
     public function validate()
     {
-        return self::make($this->inputData, $this->rules, $this->errorMessages);
+        return $this->make(
+            $this->inputData,
+            $this->rules,
+            $this->errorMessages
+        );
     }
 
     /**
      * Make validation.
      *
-     * @param array $data         user request data
-     * @param array $rules        validation rules
+     * @param array $data user request data
+     * @param array $rules validation rules
      * @param array $userMessages custom error messages
+     * @param ValidationAdaptor $validationAdaptor
      *
      * @return ValidatorFacade
      */
-    private static function make(array $data, array $rules, array $userMessages = [])
-    {
-        self::$validatorFacade = new ValidatorFacade($userMessages);
-        $data = self::prepareData($data);
-        $rules = self::prepareRules($rules);
+    private function make(
+        array $data,
+        array $rules,
+        array $userMessages = []
+    ) {
+        self::$validatorFacade = new ValidatorFacade($this->validationProvider, $userMessages);
+        $data = $this->prepareData($data);
+        $rules = $this->prepareRules($rules);
 
         foreach ($rules as $fieldName => $fieldRules) {
             $fieldName = trim($fieldName);
@@ -81,7 +100,10 @@ final class Validator
 
                 // For date/time validators.
                 if (count($ruleNameParam) >= 2) {
-                    $ruleValue = implode(self::$ruleParamSeparator, array_slice($ruleNameParam, 1));
+                    $ruleValue = implode(self::$ruleParamSeparator, array_slice(
+                        $ruleNameParam,
+                        1
+                    ));
                     //for other params
                 } else {
                     $ruleValue = isset($ruleNameParam[1]) ? $ruleNameParam[1] : '';
@@ -90,11 +112,16 @@ final class Validator
                 self::$config[BaseRule::CONFIG_DATA] = $data;
                 self::$config[BaseRule::CONFIG_FIELD_RULES] = $fieldRules;
 
-                $ruleInstance = RulesFactory::createRule($ruleName, self::$config, [
-                    $fieldName,                                        // The field name
-                    isset($data[$fieldName]) ? $data[$fieldName] : '', // The provided value
-                    $ruleValue,                                        // The rule's value
-                ]);
+                $ruleInstance = RulesFactory::createRule(
+                    $ruleName,
+                    self::$config,
+                    [
+                        $fieldName,                                        // The field name
+                        isset($data[$fieldName]) ? $data[$fieldName] : '', // The provided value
+                        $ruleValue,                                        // The rule's value
+                    ],
+                    $this->validationProvider
+                );
 
                 if (!$ruleInstance->isValid()) {
                     self::$validatorFacade->chooseErrorMessage($ruleInstance);
@@ -112,7 +139,7 @@ final class Validator
      *
      * @return array
      */
-    private static function prepareData(array $data)
+    private function prepareData(array $data)
     {
         $newData = [];
 
@@ -137,7 +164,7 @@ final class Validator
      *
      * @return array
      */
-    private static function prepareRules(array $rules)
+    private function prepareRules(array $rules)
     {
         $mergedRules = [];
 

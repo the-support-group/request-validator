@@ -11,8 +11,12 @@ class RulesFactory
      *
      * @return mixed
      */
-    public static function createRule($ruleName, $config, $params)
-    {
+    public static function createRule(
+        $ruleName,
+        $config,
+        $params,
+        $validationProvider
+    ) {
         $ruleName = ucfirst($ruleName);
 
         if (!file_exists(__DIR__.'/../Rules/'.$ruleName.'.php')) {
@@ -20,7 +24,7 @@ class RulesFactory
         }
 
         $class = 'TheSupportGroup\\Validator\\Rules\\'.$ruleName;
-        $ruleInstance = new $class($config);
+        $ruleInstance = new $class($config, $validationProvider);
         $ruleInstance->setParams($params);
 
         return $ruleInstance;

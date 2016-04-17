@@ -2,7 +2,9 @@
 
 namespace TheSupportGroup\Validator\Helpers;
 
+use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
 use TheSupportGroup\Validator\Rules\BaseRule;
+use TheSupportGroup\Validator\Validator;
 
 class ValidatorFacade
 {
@@ -15,10 +17,35 @@ class ValidatorFacade
     /** @var array|null all errors bag */
     private $fieldsErrorBag = null;
 
-    public function __construct(array $userMessages)
-    {
+    /**
+     * @param ValidationProviderInterface $validationProvider
+     * @param array $userMessages
+     */
+    public function __construct(
+        ValidationProviderInterface $validationProvider,
+        array $userMessages = []
+    ) {
         $this->fieldsErrorBag = new FieldsErrorBag($this);
+        $this->validationProvider = $validationProvider;
         $this->userMessages = $userMessages;
+    }
+
+    /**
+     * @param array $inputData
+     * @param array $rules
+     * @param array $errorMessages
+     */
+    public function validate(
+        array $inputData,
+        array $rules = [],
+        array $errorMessages = []
+    ) {
+        return (new Validator(
+            $this->validationProvider,
+            $inputData,
+            $rules,
+            $errorMessages
+        ))->validate();
     }
 
     /**
@@ -57,9 +84,9 @@ class ValidatorFacade
      *
      * @return bool
      */
-    public function has($fieldName)
+    public function hasErrors($fieldName)
     {
-        return (bool) count($this->messages($fieldName));
+        return (bool) count($this->getErrorMessages($fieldName));
     }
 
     /**
@@ -69,7 +96,7 @@ class ValidatorFacade
      *
      * @return array
      */
-    public function messages($field = '')
+    public function getErrorMessages($field = '')
     {
         if ($field) {
             return isset($this->errorMessages[$field]) ? $this->errorMessages[$field] : [];
@@ -130,26 +157,6 @@ class ValidatorFacade
     }
 
     /**
-     * Checks request is valid.
-     *
-     * @return bool
-     */
-    public function passes()
-    {
-        return $this->count() === 0;
-    }
-
-    /**
-     * Check if request failed.
-     *
-     * @return bool
-     */
-    public function fails()
-    {
-        return !$this->passes();
-    }
-
-    /**
      * Choosing error message: custom or default.
      *
      * @param $instance
@@ -158,17 +165,24 @@ class ValidatorFacade
     {
         list($fieldName, $ruleValue, $ruleParams) = $instance->getParams();
         $ruleErrorFormat = $fieldName.'.'.lcfirst($instance->getRuleName());
+
         if (isset($this->userMessages[$ruleErrorFormat])) {
             $ruleErrorMessage = $this->userMessages[$ruleErrorFormat];
         } else {
             $ruleErrorMessage = $instance->getMessage();
         }
-        $this->add($fieldName, strtr($ruleErrorMessage, [
-                ':field:' => $fieldName,
-                ':value:' => $ruleValue,
-                ':param:' => $ruleParams,
-            ]
-        ));
+
+        $this->add(
+            $fieldName,
+            strtr(
+                $ruleErrorMessage,
+                [
+                    ':field:' => $fieldName,
+                    ':value:' => $ruleValue,
+                    ':param:' => $ruleParams,
+                ]
+            )
+        );
     }
 
     /**

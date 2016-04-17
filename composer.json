@@ -10,11 +10,11 @@
     ],
     "require": {
         "php": ">=5.5.0",
-        "the-support-group/validation-provider-interop": "*",
-        "the-support-group/validation-adaptor": "*"
+        "the-support-group/validator-interop": "dev-master"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.5"
+        "phpunit/phpunit": "~4.5",
+        "respect/validation": "~1.0"
     },
     "autoload": {
         "psr-4": {

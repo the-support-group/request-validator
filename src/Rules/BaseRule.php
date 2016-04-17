@@ -3,7 +3,7 @@
 namespace TheSupportGroup\Validator\Rules;
 
 use Exception;
-use TheSupportGroup\Common\ValidationProvider\ValidationProviderInterface;
+use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
 
 abstract class BaseRule
 {
@@ -55,7 +55,7 @@ abstract class BaseRule
      */
     public function validate($rule, $value)
     {
-        return $rule->validate($value);
+        return $this->validator->validate($rule, $value);
     }
 
     /**
