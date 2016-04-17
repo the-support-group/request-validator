@@ -1,5 +1,5 @@
 {
-    "name": "easyfundraising/validator",
+    "name": "the-support-group/validator",
     "type": "library",
     "description": "Open source PHP validator",
     "authors": [
@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": ">=5.5.0",
-        "the-support-group/validation-provider-interface": "*",
+        "the-support-group/validation-provider-interop": "*",
         "the-support-group/validation-adaptor": "*"
     },
     "require-dev": {
