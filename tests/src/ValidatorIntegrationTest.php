@@ -7,6 +7,7 @@ use TheSupportGroup\Common\Validator\Helpers\ValidatorFacade;
 use TheSupportGroup\Common\Validator\Helpers;
 use PHPUnit_Framework_TestCase;
 use Respect\Validation\Validatable;
+use TheSupportGroup\Common\ValidationAdaptor\ValidationAdaptor;
 use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
 
 class ValidatorIntegrationTest extends PHPUnit_Framework_TestCase
@@ -16,7 +17,7 @@ class ValidatorIntegrationTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $respectValidation = new \Respect\Validation\Validator();
-        $validationProviderMock = new \TheSupportGroup\Common\ValidationAdaptor\ValidationAdaptor($respectValidation);
+        $validationProviderMock = new ValidationAdaptor($respectValidation);
         $errorBag = new Helpers\FieldsErrorBag();
         $validationResultProcessorMock = new Helpers\ValidationResultProcessor($errorBag);
 

@@ -41,6 +41,18 @@ class FieldsErrorBag implements FieldsErrorBagInterface
     }
 
     /**
+     * setErrorMessages
+     *
+     * @return $this
+     */
+    public function setErrorMessages(array $errorMessages)
+    {
+        $this->errorMessages = $errorMessages;
+
+        return $this;
+    }
+
+    /**
      * Get error messages.
      */
     public function getErrorMessages()
@@ -65,6 +77,8 @@ class FieldsErrorBag implements FieldsErrorBagInterface
     public function add($fieldName, $message)
     {
         $this->errorMessages[$fieldName][] = $message;
+
+        return $this;
     }
 
     /**
@@ -79,5 +93,13 @@ class FieldsErrorBag implements FieldsErrorBagInterface
         $this->fieldName = $fieldName;
 
         return $this;
+    }
+
+    /**
+     * Get the fieldName set.
+     */
+    public function getFieldName()
+    {
+        return $this->fieldName;
     }
 }

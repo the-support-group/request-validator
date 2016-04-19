@@ -30,6 +30,8 @@ class ValidatorFacade implements ValidationFacadeInterface
      * @param array $inputData
      * @param array $rules
      * @param array $errorMessages
+     * 
+     * @return ValidationResultProcessor
      */
     public function validate(
         array $inputData,
