@@ -1,6 +1,6 @@
 <?php
 
-namespace TheSupportGroup\Validator\Rules;
+namespace TheSupportGroup\Common\Validator\Rules;
 
 class Ip extends BaseRule
 {
@@ -12,7 +12,7 @@ class Ip extends BaseRule
 
         $input = trim($this->getParams()[1]);
 
-        return $this->respect('Ip')->validate($input);
+        return $this->Ip()->validate($input);
     }
 
     public function getMessage()

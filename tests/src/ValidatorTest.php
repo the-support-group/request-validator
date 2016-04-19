@@ -1,5 +1,12 @@
 <?php
 
+namespace TheSupportGroup\Common\ValidatorTests;
+
+use TheSupportGroup\Common\Validator\Validator;
+use TheSupportGroup\Common\Validator\Helpers\ValidatorFacade;
+use TheSupportGroup\Common\Validator\Helpers;
+use PHPUnit_Framework_TestCase;
+use Respect\Validation\Validatable;
 use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
 
 class ValidatorTest extends PHPUnit_Framework_TestCase
@@ -24,6 +31,31 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         ];
 
         $this->nonUniqueEmail = 'dd@dd.dd';
+
+        $validateable = $this->getMockBuilder(Validatable::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $validationProviderMock = $this->getMockBuilder(ValidationProviderInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $validationProviderMock->expects($this->any())
+            ->method('rule')
+            ->will($this->returnValue($validationProviderMock));
+
+        $validationProviderMock->expects($this->any())
+            ->method('validate')
+            ->will($this->returnValue($validateable));
+
+        $validationResultProcessorMock = $this->getMockBuilder(Helpers\ValidationResultProcessor::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->validationFacade = new ValidatorFacade(
+            $validationProviderMock,
+            $validationResultProcessorMock
+        );
     }
 
     /**
@@ -46,48 +78,29 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
             'age.in' => 'this is so wrong'
         ];
 
-        $validateable = $this->getMockBuilder(Respect\Validation\Validatable::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $validationProviderMock = $this->getMockBuilder(ValidationProviderInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $validationProviderMock->expects($this->any())
-            ->method('rule')
-            ->will($this->returnValue($validationProviderMock));
-
-        $validationProviderMock->expects($this->any())
-            ->method('validate')
-            ->will($this->returnValue($validateable));
-
-        $validationFacade = new TheSupportGroup\Validator\Helpers\ValidatorFacade(
-            $validationProviderMock
-        );
-
-        $validator = $validationFacade->validate($inputData, $rules, $errorMessages);
-        print_r($validator->getErrorMessages());
+        $ValidationResultProcessor = $this->validationFacade->validate($inputData, $rules, $errorMessages);
+        print_r($ValidationResultProcessor->getErrors());
+        print_r($ValidationResultProcessor->getErrors('age'));
     }
 
-    // public function testValidationOK()
-    // {
-    //     $validationResult = V::make($this->postData, [
-    //         'firstname, lastname' => 'required|alpha|min:2',
-    //         'lastname'            => 'max:18',
-    //         'email'               => 'email|unique:users',
-    //         'age'                 => 'min:16|numeric',
-    //         'date'                => 'dateFormat:(m-Y.d H:i)',
-    //         'randNum'             => 'between:1, 100',
-    //         'ip'                  => 'ip',
-    //         'password'            => 'required|min:6',
-    //         'password_repeat'     => 'same:password',
-    //         'json'                => 'json',
-    //         'site'                => 'url',
-    //     ]);
+    public function testValidationOK()
+    {
+        $validationResult = $this->validationFacade->validate($this->postData, [
+            'firstname, lastname' => 'required|alpha|min:2',
+            'lastname'            => 'max:18',
+            'email'               => 'email',
+            'age'                 => 'min:16|numeric',
+            'date'                => 'dateFormat:(m-Y.d H:i)',
+            'randNum'             => 'between:1, 100',
+            'ip'                  => 'ip',
+            'password'            => 'required|min:6',
+            'password_repeat'     => 'same:password',
+            'json'                => 'json',
+            'site'                => 'url',
+        ]);
 
-    //     $this->assertEmpty($validationResult->messages());
-    // }
+        $this->assertEmpty($validationResult->getErrors());
+    }
 
     // public function testNonUniqueError()
     // {

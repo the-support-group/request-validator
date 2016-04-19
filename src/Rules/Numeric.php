@@ -1,6 +1,6 @@
 <?php
 
-namespace TheSupportGroup\Validator\Rules;
+namespace TheSupportGroup\Common\Validator\Rules;
 
 class Numeric extends BaseRule
 {
@@ -10,9 +10,7 @@ class Numeric extends BaseRule
             return true;
         }
 
-        $rule = $this->Numeric();
-
-        return $this->validate($rule, trim($this->getParams()[1]));
+        return $this->Numeric()->validate(trim($this->getParams()[1]));
     }
 
     public function getMessage()

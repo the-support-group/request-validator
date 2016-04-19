@@ -1,6 +1,6 @@
 <?php
 
-namespace TheSupportGroup\Validator\Rules;
+namespace TheSupportGroup\Common\Validator\Rules;
 
 class In extends BaseRule
 {
@@ -16,9 +16,7 @@ class In extends BaseRule
             return trim($elem);
         }, explode(',', $this->getParams()[2]));
 
-        $validationObject = $this->In($values);
-
-        return $this->validate($validationObject, $input);
+        return $this->In($values)->validate($input);
     }
 
     public function getMessage()

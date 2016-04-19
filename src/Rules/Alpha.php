@@ -1,6 +1,6 @@
 <?php
 
-namespace TheSupportGroup\Validator\Rules;
+namespace TheSupportGroup\Common\Validator\Rules;
 
 class Alpha extends BaseRule
 {
@@ -12,9 +12,7 @@ class Alpha extends BaseRule
 
         $value = trim($this->getParams()[1]);
 
-        $rule = $this->alpha();
-
-        return $this->validate($rule, $value);
+        return $this->alpha()->validate($value);
     }
 
     /**

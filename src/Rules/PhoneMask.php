@@ -1,6 +1,6 @@
 <?php
 
-namespace TheSupportGroup\Validator\Rules;
+namespace TheSupportGroup\Common\Validator\Rules;
 
 class PhoneMask extends BaseRule
 {

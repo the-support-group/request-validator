@@ -1,6 +1,6 @@
 <?php
 
-namespace Progsmile\Validator\Contracts\Rules;
+namespace TheSupportGroup\Common\Validator\Contracts\Rules;
 
 interface ExistInterface
 {

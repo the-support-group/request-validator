@@ -1,6 +1,6 @@
 <?php
 
-namespace TheSupportGroup\Validator\Tests\Rules;
+namespace TheSupportGroup\Common\ValidatorTests\Rules;
 
 use PHPUnit_Framework_TestCase;
 use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
@@ -9,7 +9,7 @@ class RulesTest extends PHPUnit_Framework_TestCase
 {
     public function testValidateAllRules()
     {
-        $namespace = 'TheSupportGroup\\Validator\\Rules\\';
+        $namespace = 'TheSupportGroup\\Common\\Validator\\Rules\\';
         $rulesDir = __DIR__ . '/../../../src/Rules';
         $ruleConfig = [];
 

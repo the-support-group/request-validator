@@ -1,8 +1,10 @@
 <?php
 
-namespace TheSupportGroup\Validator\Helpers;
+namespace TheSupportGroup\Common\Validator\Helpers;
 
-class RulesFactory
+use TheSupportGroup\Common\Validator\Contracts\Helpers\RulesFactoryInterface;
+
+class RulesFactory implements RulesFactoryInterface
 {
     /**
      * @param $ruleName
@@ -23,7 +25,7 @@ class RulesFactory
             trigger_error('Such rule doesn\'t exists: '.$ruleName, E_USER_ERROR);
         }
 
-        $class = 'TheSupportGroup\\Validator\\Rules\\'.$ruleName;
+        $class = 'TheSupportGroup\\Common\\Validator\\Rules\\'.$ruleName;
         $ruleInstance = new $class($config, $validationProvider);
         $ruleInstance->setParams($params);
 

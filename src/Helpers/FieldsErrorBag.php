@@ -1,21 +1,23 @@
 <?php
 
-namespace TheSupportGroup\Validator\Helpers;
+namespace TheSupportGroup\Common\Validator\Helpers;
 
-class FieldsErrorBag
+use TheSupportGroup\Common\Validator\Contracts\Helpers\FieldsErrorBagInterface;
+
+class FieldsErrorBag implements FieldsErrorBagInterface
 {
     /** @var string magic field name */
     private $fieldName = '';
 
-    /** @var ValidatorFacade error bag */
+    /** @var ValidationResultProcessor error bag */
     private $errorBag = null;
 
     /**
      * FieldsErrorBag constructor.
      *
-     * @param ValidatorFacade $errorBag
+     * @param ValidationResultProcessor $errorBag
      */
-    public function __construct(ValidatorFacade $errorBag)
+    public function __construct(ValidationResultProcessor $errorBag)
     {
         $this->errorBag = $errorBag;
     }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Progsmile\Validator\Format;
+namespace TheSupportGroup\Common\Validator\Format;
 
-use Progsmile\Validator\Contracts\Format\FormatInterface;
+use TheSupportGroup\Common\Validator\Contracts\Format\FormatInterface;
 
 class HTML implements FormatInterface
 {

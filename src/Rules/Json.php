@@ -1,6 +1,6 @@
 <?php
 
-namespace TheSupportGroup\Validator\Rules;
+namespace TheSupportGroup\Common\Validator\Rules;
 
 class Json extends BaseRule
 {
@@ -10,7 +10,7 @@ class Json extends BaseRule
             return true;
         }
 
-        return $this->respect('Json')->validate($this->getParams()[1]);
+        return $this->Json()->validate($this->getParams()[1]);
     }
 
     public function getMessage()

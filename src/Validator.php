@@ -1,16 +1,16 @@
 <?php
 
-namespace TheSupportGroup\Validator;
+namespace TheSupportGroup\Common\Validator;
 
 use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
-use TheSupportGroup\Validator\Helpers\RulesFactory;
-use TheSupportGroup\Validator\Helpers\ValidatorFacade;
-use TheSupportGroup\Validator\Rules\BaseRule;
+use TheSupportGroup\Common\Validator\Helpers\RulesFactory;
+use TheSupportGroup\Common\Validator\Helpers\ValidationResultProcessor;
+use TheSupportGroup\Common\Validator\Rules\BaseRule;
 
 final class Validator
 {
-    /** @var ValidatorFacade */
-    private static $validatorFacade = null;
+    /** @var ValidationResultProcessor */
+    private static $ValidationResultProcessor = null;
 
     /**
      * Use to separate rules.
@@ -45,6 +45,7 @@ final class Validator
      */
     public function __construct(
         ValidationProviderInterface $validationProvider,
+        ValidationResultProcessor $validationResultProcessor,
         array $inputData,
         array $rules = [],
         array $errorMessages = []
@@ -53,8 +54,12 @@ final class Validator
         $this->errorMessages = $errorMessages;
         $this->inputData = $inputData;
         $this->validationProvider = $validationProvider;
+        $this->validationResultProcessor = $validationResultProcessor;
     }
 
+    /**
+     * Validate input data against the rules provided.
+     */
     public function validate()
     {
         return $this->make(
@@ -70,16 +75,14 @@ final class Validator
      * @param array $data user request data
      * @param array $rules validation rules
      * @param array $userMessages custom error messages
-     * @param ValidationAdaptor $validationAdaptor
      *
-     * @return ValidatorFacade
+     * @return ValidatorRule
      */
     private function make(
         array $data,
         array $rules,
         array $userMessages = []
     ) {
-        self::$validatorFacade = new ValidatorFacade($this->validationProvider, $userMessages);
         $data = $this->prepareData($data);
         $rules = $this->prepareRules($rules);
 
@@ -123,13 +126,13 @@ final class Validator
                     $this->validationProvider
                 );
 
-                if (!$ruleInstance->isValid()) {
-                    self::$validatorFacade->chooseErrorMessage($ruleInstance);
+                if (! $ruleInstance->isValid()) {
+                    $this->validationResultProcessor->chooseErrorMessage($ruleInstance);
                 }
             }
         }
 
-        return self::$validatorFacade;
+        return $this->validationResultProcessor;
     }
 
     /**

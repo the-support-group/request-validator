@@ -1,6 +1,6 @@
 <?php
 
-namespace TheSupportGroup\Validator\Rules;
+namespace TheSupportGroup\Common\Validator\Rules;
 
 class Min extends BaseRule
 {
@@ -18,7 +18,7 @@ class Min extends BaseRule
         if ($this->hasRule('numeric') !== false && is_numeric($input)) {
             $this->isNumeric = true;
 
-            return $this->respect('Min', [$value, true])->validate($input);
+            return $this->Min([$value, true])->validate($input);
         }
 
         // there is no way respect/validator supports string for rule 'Min'

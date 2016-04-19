@@ -1,6 +1,6 @@
 <?php
 
-namespace TheSupportGroup\Validator\Rules;
+namespace TheSupportGroup\Common\Validator\Rules;
 
 class Equals extends BaseRule
 {
@@ -10,9 +10,7 @@ class Equals extends BaseRule
             return true;
         }
 
-        $validationRule = $this->Equals($this->getParams()[1]);
-
-        return $this->validate($validationRule, trim($this->getParams()[2]));
+        return $this->Equals($this->getParams()[1])->validate(trim($this->getParams()[2]));
     }
 
     public function getMessage()

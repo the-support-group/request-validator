@@ -1,6 +1,6 @@
 <?php
 
-namespace TheSupportGroup\Validator\Rules;
+namespace TheSupportGroup\Common\Validator\Rules;
 
 class NotIn extends BaseRule
 {
@@ -16,9 +16,9 @@ class NotIn extends BaseRule
             return trim($elem);
         }, explode(',', $this->getParams()[2]));
 
-        $in = $this->respect('In', [$values]);
+        $in = $this->In([$values]);
 
-        return $this->respect('Not', [$in])->validate($input);
+        return $this->Not([$in])->validate($input);
     }
 
     public function getMessage()

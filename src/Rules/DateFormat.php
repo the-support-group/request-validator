@@ -1,6 +1,6 @@
 <?php
 
-namespace TheSupportGroup\Validator\Rules;
+namespace TheSupportGroup\Common\Validator\Rules;
 
 class DateFormat extends BaseRule
 {
@@ -13,7 +13,7 @@ class DateFormat extends BaseRule
         $time = $this->getParams()[1];
         $format = trim($this->getParams()[2], '()');
 
-        return $this->respect('Date', [$format])->validate($time);
+        return $this->Date([$format])->validate($time);
     }
 
     /**

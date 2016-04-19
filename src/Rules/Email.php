@@ -1,6 +1,6 @@
 <?php
 
-namespace TheSupportGroup\Validator\Rules;
+namespace TheSupportGroup\Common\Validator\Rules;
 
 class Email extends BaseRule
 {
@@ -10,7 +10,7 @@ class Email extends BaseRule
             return true;
         }
 
-        return $this->respect('Email')->validate($this->getParams()[1]);
+        return $this->Email()->validate($this->getParams()[1]);
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace TheSupportGroup\Validator\Rules;
+namespace TheSupportGroup\Common\Validator\Rules;
 
 use Exception;
 use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
@@ -21,10 +21,12 @@ abstract class BaseRule
      *
      * @param $config
      */
-    public function __construct($config, ValidationProviderInterface $validationProvider)
-    {
+    public function __construct(
+        $config,
+        ValidationProviderInterface $validationProvider
+    ) {
         $this->config = $config;
-        $this->validator = $validationProvider;
+        $this->validationProvider = $validationProvider;
 
         // Import mapping only once.
         if (! self::$validatorMapping) {
@@ -37,25 +39,16 @@ abstract class BaseRule
      *
      * @return object Validator rule object.
      */
-    public function __call($method, $params)
+    public function __call($method, array $params = array())
     {
         // Get the mapping out of the mapper file.
         $validatorMethod = $this->getMappedMethod($method);
 
         // Try running rule against params.
-        $validatorRule = $this->buildRule($validatorMethod, $params);
+        $ValidationResultProcessor = $this->buildRule($validatorMethod, $params);
 
         // Return resulting method.
-        return $validatorRule;
-    }
-
-    /**
-     * Validate rule against value provided.
-     * We can control which method is called on the external library.
-     */
-    public function validate($rule, $value)
-    {
-        return $this->validator->validate($rule, $value);
+        return $ValidationResultProcessor;
     }
 
     /**
@@ -63,7 +56,16 @@ abstract class BaseRule
      */
     private function buildRule($ruleName, $arguments = [])
     {
-        return $this->validator->rule($ruleName, $arguments);
+        return $this->validationProvider->rule($ruleName, $arguments);
+    }
+
+    /**
+     * Validate rule against value provided.
+     * We can control which method is called on the external library.
+     */
+    public function validate($value)
+    {
+        return $this->validationProvider->validate($value);
     }
 
     /**
@@ -96,14 +98,6 @@ abstract class BaseRule
         }
 
         return isset($this->config[$type]) ? $this->config[$type] : [];
-    }
-
-    /**
-     * Get validator object.
-     */
-    public function getValidator()
-    {
-        // return $this->validator;
     }
 
     /**

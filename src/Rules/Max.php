@@ -1,6 +1,6 @@
 <?php
 
-namespace TheSupportGroup\Validator\Rules;
+namespace TheSupportGroup\Common\Validator\Rules;
 
 class Max extends BaseRule
 {
@@ -18,7 +18,7 @@ class Max extends BaseRule
         if ($this->hasRule('numeric') !== false && is_numeric($input)) {
             $this->isNumeric = true;
 
-            return $this->respect('Max', [$value, true])->validate($input);
+            return $this->Max([$value, true])->validate($input);
         }
 
         // there is no way respect/validator supports string for rule 'Max'

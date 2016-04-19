@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/the-support-group/validation-interop.git",
-                "reference": "38f236ee9ba812610ce0abf307910cead8cc962a"
+                "reference": "9764efe083698d03c2e97b1bc480ed9001f37877"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/the-support-group/validation-interop/zipball/38f236ee9ba812610ce0abf307910cead8cc962a",
-                "reference": "38f236ee9ba812610ce0abf307910cead8cc962a",
+                "url": "https://api.github.com/repos/the-support-group/validation-interop/zipball/9764efe083698d03c2e97b1bc480ed9001f37877",
+                "reference": "9764efe083698d03c2e97b1bc480ed9001f37877",
                 "shasum": ""
             },
             "require": {
@@ -38,7 +38,7 @@
                 }
             ],
             "description": "PHP validation interface provider",
-            "time": "2016-04-17 16:24:08"
+            "time": "2016-04-18 14:19:24"
         }
     ],
     "packages-dev": [

@@ -1,6 +1,6 @@
 <?php
 
-namespace TheSupportGroup\Validator\Rules;
+namespace TheSupportGroup\Common\Validator\Rules;
 
 class Same extends BaseRule
 {
@@ -15,7 +15,7 @@ class Same extends BaseRule
             return false;
         }
 
-        return $this->respect('Equals', [$data[$value]])->validate($input);
+        return $this->Equals([$data[$value]])->validate($input);
     }
 
     public function getMessage()

@@ -1,6 +1,6 @@
 <?php
 
-namespace TheSupportGroup\Validator\Rules;
+namespace TheSupportGroup\Common\Validator\Rules;
 
 class Url extends BaseRule
 {
@@ -12,7 +12,7 @@ class Url extends BaseRule
 
         $input = trim($this->getParams()[1]);
 
-        return $this->respect('Url')->validate($input);
+        return $this->Url()->validate($input);
     }
 
     public function getMessage()

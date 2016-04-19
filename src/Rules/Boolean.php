@@ -1,6 +1,6 @@
 <?php
 
-namespace TheSupportGroup\Validator\Rules;
+namespace TheSupportGroup\Common\Validator\Rules;
 
 class Boolean extends BaseRule
 {
@@ -12,7 +12,7 @@ class Boolean extends BaseRule
 
         $value = trim($this->getParams()[1]);
 
-        return $this->respect('BoolVal')->validate($value);
+        return $this->BoolVal()->validate($value);
     }
 
     /**
