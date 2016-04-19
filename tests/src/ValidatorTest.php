@@ -3,7 +3,6 @@
 namespace TheSupportGroup\Common\ValidatorTests;
 
 use TheSupportGroup\Common\Validator\Validator;
-use TheSupportGroup\Common\Validator\Helpers\ValidatorFacade;
 use TheSupportGroup\Common\Validator\Helpers;
 use PHPUnit_Framework_TestCase;
 use Respect\Validation\Validatable;
@@ -52,45 +51,14 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->validationFacade = new ValidatorFacade(
+        $validationResultProcessorMock->fieldsErrorBag = $this->getMockBuilder(Helpers\FieldsErrorBag::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->validationFacade = new Helpers\ValidatorFacade(
             $validationProviderMock,
             $validationResultProcessorMock
         );
-    }
-
-    /**
-     * @group integration
-     */
-    public function testTheRealThing()
-    {
-        $inputData = [
-            'firstname' => 'Abdul',
-            'lastname' => 'Qureshi',
-            'age' => 26
-        ];
-
-        $rules = [
-            'firstname,lastname' => 'alpha|equals:bla',
-            'age' => 'in:21,34'
-        ];
-
-        $errorMessages = [
-            'age.in' => 'this is so wrong'
-        ];
-
-        $respectValidation = new \Respect\Validation\Validator();
-        $errorBag = new Helpers\FieldsErrorBag();
-        $validationProviderMock = new \TheSupportGroup\Common\ValidationAdaptor\ValidationAdaptor($respectValidation);
-        $validationResultProcessorMock = new Helpers\ValidationResultProcessor($errorBag);
-
-        $validationFacade = new ValidatorFacade(
-            $validationProviderMock,
-            $validationResultProcessorMock
-        );
-        
-        $validationResult = $validationFacade->validate($inputData, $rules, $errorMessages);
-
-        print_r($validationResult->getErrors());
     }
 
     /**
