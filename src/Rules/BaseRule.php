@@ -45,10 +45,10 @@ abstract class BaseRule
         $validatorMethod = $this->getMappedMethod($method);
 
         // Try running rule against params.
-        $ValidationResultProcessor = $this->buildRule($validatorMethod, $params);
+        $validationResultProcessor = $this->buildRule($validatorMethod, $params);
 
         // Return resulting method.
-        return $ValidationResultProcessor;
+        return $validationResultProcessor;
     }
 
     /**

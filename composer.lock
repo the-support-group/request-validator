@@ -4,9 +4,46 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "79d29f6ef88e2ff5d14b91050c5a48f6",
-    "content-hash": "b879a8ec3f23383eb4fc6427ca535575",
+    "hash": "44d0653fe140bbffd59a924aac8b800a",
+    "content-hash": "8f95290a6e5f79c830cd0333bbe7ab85",
     "packages": [
+        {
+            "name": "the-support-group/validation-adaptor",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/the-support-group/validation-adaptor.git",
+                "reference": "6c552edf65e105ed98c77092e6e7f973da70aca4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/the-support-group/validation-adaptor/zipball/6c552edf65e105ed98c77092e6e7f973da70aca4",
+                "reference": "6c552edf65e105ed98c77092e6e7f973da70aca4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "the-support-group/validator-interop": "dev-master"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TheSupportGroup\\Common\\ValidationAdaptor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Abdul Wahab Qureshi",
+                    "email": "abdul@easyfundraising.org.uk"
+                }
+            ],
+            "description": "Open source PHP validation provider",
+            "time": "2016-04-17 16:53:29"
+        },
         {
             "name": "the-support-group/validator-interop",
             "version": "dev-master",
@@ -1063,7 +1100,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "the-support-group/validator-interop": 20
+        "the-support-group/validator-interop": 20,
+        "the-support-group/validation-adaptor": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

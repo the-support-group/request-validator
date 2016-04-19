@@ -9,14 +9,8 @@ use TheSupportGroup\Common\Validator\Contracts\Helpers\ValidationResultProcessor
 
 class ValidationResultProcessor implements ValidationResultProcessorInterface
 {
-    /** @var array messages passed to validator (highest priority) */
-    private $userMessages = [];
-
-    /** @var array out error messages */
-    private $errorMessages = [];
-
     /** @var array|null all errors bag */
-    private $fieldsErrorBag = null;
+    public $fieldsErrorBag = null;
 
     /**
      * @param ValidationProviderInterface $validationProvider
@@ -27,26 +21,7 @@ class ValidationResultProcessor implements ValidationResultProcessorInterface
         array $userMessages = []
     ) {
         $this->fieldsErrorBag = $fieldsErrorBag;
-        $this->userMessages = $userMessages;
-    }
-
-    /**
-     * Erase all error messages.
-     */
-    public function clear()
-    {
-        $this->errorMessages = [];
-    }
-
-    /**
-     * Add new message.
-     *
-     * @param $fieldName
-     * @param $message
-     */
-    public function add($fieldName, $message)
-    {
-        $this->errorMessages[$fieldName][] = $message;
+        $this->fieldsErrorBag->setUserMessages($userMessages);
     }
 
     /**
@@ -56,7 +31,7 @@ class ValidationResultProcessor implements ValidationResultProcessorInterface
      */
     public function count()
     {
-        return count($this->errorMessages);
+        return count($this->fieldsErrorBag->getErrorMessages());
     }
 
     /**
@@ -81,10 +56,12 @@ class ValidationResultProcessor implements ValidationResultProcessorInterface
     public function getErrors($field = '')
     {
         if ($field) {
-            return isset($this->errorMessages[$field]) ? $this->errorMessages[$field] : [];
+            return isset($this->fieldsErrorBag->getErrorMessages()[$field]) ? $this->fieldsErrorBag->getErrorMessages()[$field] : [];
         }
         $messages = [];
-        array_walk_recursive($this->errorMessages, function ($message) use (&$messages) {
+        // Pass in the variable.
+        $errorMessages = $this->fieldsErrorBag->getErrorMessages();
+        array_walk_recursive($errorMessages, function ($message) use (&$messages) {
             $messages[] = $message;
         });
 
@@ -98,7 +75,7 @@ class ValidationResultProcessor implements ValidationResultProcessorInterface
      */
     public function raw()
     {
-        return $this->errorMessages;
+        return $this->fieldsErrorBag->getErrorMessages();
     }
 
     /**
@@ -109,7 +86,7 @@ class ValidationResultProcessor implements ValidationResultProcessorInterface
     public function firsts()
     {
         $messages = [];
-        foreach ($this->errorMessages as $fieldsMessages) {
+        foreach ($this->fieldsErrorBag->getErrorMessages() as $fieldsMessages) {
             foreach ($fieldsMessages as $fieldMessage) {
                 $messages[] = $fieldMessage;
                 break;
@@ -128,8 +105,8 @@ class ValidationResultProcessor implements ValidationResultProcessorInterface
      */
     public function first($field = '')
     {
-        if (isset($this->errorMessages[$field])) {
-            $message = reset($this->errorMessages[$field]);
+        if (isset($this->fieldsErrorBag->getErrorMessages()[$field])) {
+            $message = reset($this->fieldsErrorBag->getErrorMessages()[$field]);
         } else {
             $firstMessages = $this->firsts();
             $message = reset($firstMessages);
@@ -148,13 +125,13 @@ class ValidationResultProcessor implements ValidationResultProcessorInterface
         list($fieldName, $ruleValue, $ruleParams) = $instance->getParams();
         $ruleErrorFormat = $fieldName.'.'.lcfirst($instance->getRuleName());
 
-        if (isset($this->userMessages[$ruleErrorFormat])) {
-            $ruleErrorMessage = $this->userMessages[$ruleErrorFormat];
+        if (isset($this->fieldsErrorBag->getUserMessages()[$ruleErrorFormat])) {
+            $ruleErrorMessage = $this->fieldsErrorBag->getUserMessages()[$ruleErrorFormat];
         } else {
             $ruleErrorMessage = $instance->getMessage();
         }
 
-        $this->add(
+        $this->fieldsErrorBag->add(
             $fieldName,
             strtr(
                 $ruleErrorMessage,

@@ -51,10 +51,10 @@ final class Validator
         array $errorMessages = []
     ) {
         $this->rules = $rules;
-        $this->errorMessages = $errorMessages;
         $this->inputData = $inputData;
         $this->validationProvider = $validationProvider;
         $this->validationResultProcessor = $validationResultProcessor;
+        $this->validationResultProcessor->fieldsErrorBag->setUserMessages($errorMessages);
     }
 
     /**
@@ -64,8 +64,7 @@ final class Validator
     {
         return $this->make(
             $this->inputData,
-            $this->rules,
-            $this->errorMessages
+            $this->rules
         );
     }
 
@@ -80,8 +79,7 @@ final class Validator
      */
     private function make(
         array $data,
-        array $rules,
-        array $userMessages = []
+        array $rules
     ) {
         $data = $this->prepareData($data);
         $rules = $this->prepareRules($rules);

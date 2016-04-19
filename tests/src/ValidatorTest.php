@@ -59,6 +59,41 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group integration
+     */
+    public function testTheRealThing()
+    {
+        $inputData = [
+            'firstname' => 'Abdul',
+            'lastname' => 'Qureshi',
+            'age' => 26
+        ];
+
+        $rules = [
+            'firstname,lastname' => 'alpha|equals:bla',
+            'age' => 'in:21,34'
+        ];
+
+        $errorMessages = [
+            'age.in' => 'this is so wrong'
+        ];
+
+        $respectValidation = new \Respect\Validation\Validator();
+        $errorBag = new Helpers\FieldsErrorBag();
+        $validationProviderMock = new \TheSupportGroup\Common\ValidationAdaptor\ValidationAdaptor($respectValidation);
+        $validationResultProcessorMock = new Helpers\ValidationResultProcessor($errorBag);
+
+        $validationFacade = new ValidatorFacade(
+            $validationProviderMock,
+            $validationResultProcessorMock
+        );
+        
+        $validationResult = $validationFacade->validate($inputData, $rules, $errorMessages);
+
+        print_r($validationResult->getErrors());
+    }
+
+    /**
      * Calls the __call method and runs through the validation.
      */
     public function testMagicMethod()
