@@ -19,15 +19,8 @@ class FieldsErrorBag implements FieldsErrorBagInterface
     private $userMessages = [];
 
     /**
-     * FieldsErrorBag constructor.
-     *
-     * @param ValidationResultProcessor $errorBag
+     * Set custom error messages.
      */
-    // public function __construct(ValidationResultProcessor $errorBag)
-    // {
-    //     $this->errorBag = $errorBag;
-    // }
-
     public function setUserMessages($userMessages)
     {
         $this->userMessages = $userMessages;
@@ -35,55 +28,21 @@ class FieldsErrorBag implements FieldsErrorBagInterface
         return $this;
     }
 
+    /**
+     * Get custom error messages.
+     */
     public function getUserMessages()
     {
         return $this->userMessages;
     }
 
+    /**
+     * Get error messages.
+     */
     public function getErrorMessages()
     {
         return $this->errorMessages;
     }
-
-    /**
-     * Get first message, by query or by rule type.
-     *
-     * @return bool|string|array
-     */
-    // public function first()
-    // {
-    //     return $this->fails() ? $this->errorBag->first($this->fieldName) : false;
-    // }
-
-    /**
-     * Get fields messages.
-     *
-     * @return array
-     */
-    // public function messages()
-    // {
-    //     return $this->fails() ? $this->errorBag->messages($this->fieldName) : [];
-    // }
-
-    /**
-     * If result is invalid.
-     *
-     * @return bool
-     */
-    // public function fails()
-    // {
-    //     return $this->errorBag->has($this->fieldName);
-    // }
-
-    /**
-     * If result is valid.
-     *
-     * @return bool
-     */
-    // public function passes()
-    // {
-    //     return !$this->fails();
-    // }
 
     /**
      * Erase all error messages.
