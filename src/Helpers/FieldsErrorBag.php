@@ -20,6 +20,8 @@ class FieldsErrorBag implements FieldsErrorBagInterface
 
     /**
      * Set custom error messages.
+     * 
+     * @param array $userMessages The custom user messages.
      */
     public function setUserMessages($userMessages)
     {
@@ -30,6 +32,8 @@ class FieldsErrorBag implements FieldsErrorBagInterface
 
     /**
      * Get custom error messages.
+     * 
+     * @return array The user messages set.
      */
     public function getUserMessages()
     {

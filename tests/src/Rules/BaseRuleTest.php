@@ -30,24 +30,6 @@ class BaseRuleTest extends PHPUnit_Framework_TestCase
             ]);
     }
 
-    /**
-     * @expectedException Exception
-     */
-    public function testThatMagicMethodWorksAsExpected()
-    {
-        $this->testObject->random();
-    }
-
-    /**
-     * Magic method works as expected.
-     */
-    public function testThatMagicMethodWorksAsExpectedWithKnownRule()
-    {
-        $result = $this->testObject->alpha();
-
-        $this->assertInstanceOf(ValidationProviderInterface::class, $result);
-    }
-
     public function testValidate()
     {
         $rule = '';

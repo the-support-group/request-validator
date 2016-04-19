@@ -3,6 +3,7 @@
 namespace TheSupportGroup\Common\Validator\Helpers;
 
 use TheSupportGroup\Common\Validator\Contracts\Helpers\RulesFactoryInterface;
+use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
 
 class RulesFactory implements RulesFactoryInterface
 {
@@ -17,7 +18,7 @@ class RulesFactory implements RulesFactoryInterface
         $ruleName,
         $config,
         $params,
-        $validationProvider
+        ValidationProviderInterface $validationProvider
     ) {
         $ruleName = ucfirst($ruleName);
 

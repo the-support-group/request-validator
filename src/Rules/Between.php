@@ -21,11 +21,11 @@ class Between extends BaseRule
 
         $input = trim($this->getParams()[1]);
 
-        $between = $this->Between([
+        $between = $this->Between(
             trim($values[0]), // min
             trim($values[1]), // max
-            true,             // inclusive
-        ]);
+            true              // inclusive
+        );
 
         if ($this->hasRule('numeric') !== false) {
             $this->isNumeric = true;

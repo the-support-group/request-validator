@@ -14,7 +14,6 @@ abstract class BaseRule
     private $config;
     private $params;
     private $validator;
-    private static $validatorMapping = [];
 
     /**
      * BaseRule constructor.
@@ -27,11 +26,6 @@ abstract class BaseRule
     ) {
         $this->config = $config;
         $this->validationProvider = $validationProvider;
-
-        // Import mapping only once.
-        if (! self::$validatorMapping) {
-            self::$validatorMapping = require __DIR__ . '/../Mapping/Mapping.php';
-        }
     }
 
     /**
@@ -42,7 +36,7 @@ abstract class BaseRule
     public function __call($method, array $params = array())
     {
         // Get the mapping out of the mapper file.
-        $validatorMethod = $this->getMappedMethod($method);
+        $validatorMethod = $this->validationProvider->getMappedMethod($method);
 
         // Try running rule against params.
         $validationResultProcessor = $this->buildRule($validatorMethod, $params);
@@ -66,22 +60,6 @@ abstract class BaseRule
     public function validate($value)
     {
         return $this->validationProvider->validate($value);
-    }
-
-    /**
-     * Get mapped method.
-     */
-    private function getMappedMethod($method)
-    {
-        // Check if the method called is provided in the mapping.
-        if (! array_key_exists($method, self::$validatorMapping)) {
-            throw new Exception(sprintf(
-                'Mapping for method "%s" not found, make sure it exists in the mapping file.',
-                $method
-            ));
-        }
-
-        return self::$validatorMapping[$method];
     }
 
     /**

@@ -13,7 +13,7 @@ class DateFormat extends BaseRule
         $time = $this->getParams()[1];
         $format = trim($this->getParams()[2], '()');
 
-        return $this->Date([$format])->validate($time);
+        return $this->Date($format)->validate($time);
     }
 
     /**

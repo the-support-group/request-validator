@@ -18,7 +18,7 @@ class Min extends BaseRule
         if ($this->hasRule('numeric') !== false && is_numeric($input)) {
             $this->isNumeric = true;
 
-            return $this->Min([$value, true])->validate($input);
+            return $this->Min($value, true)->validate($input);
         }
 
         // there is no way respect/validator supports string for rule 'Min'
@@ -28,7 +28,7 @@ class Min extends BaseRule
     public function getMessage()
     {
         if ($this->isNumeric) {
-            return 'Field :field: should be grater than :param:';
+            return 'Field :field: should be greater than :param:';
         }
 
         return 'Field :field: should be at least :param: characters';
