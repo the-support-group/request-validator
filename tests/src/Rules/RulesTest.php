@@ -7,6 +7,9 @@ use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
 
 class RulesTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * Test that the rules have expected basic functionality in them.
+     */
     public function testValidateAllRules()
     {
         $namespace = 'TheSupportGroup\\Common\\Validator\\Rules\\';
