@@ -12,13 +12,39 @@ use TheSupportGroup\Common\Validator\Contracts\Helpers as Contracts;
 
 class ValidatorTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * The post data.
+     */
     private $postData;
-    private $nonUniqueEmail;
+
+    /**
+     * The validateable mock object.
+     */
     private $validateable;
+
+    /**
+     * The validationProvider mock object.
+     */
     private $validationProviderMock;
+
+    /**
+     * The validation result processor.
+     */
     private $validationResultProcessorMock;
+
+    /**
+     * The rules factory mock.
+     */
     private $rulesFactoryMock;
 
+    /**
+     * The object to be tested.
+     */
+    private $testObject;
+
+    /**
+     * Set up the testing object.
+     */
     public function setUp()
     {
         $this->postData = [

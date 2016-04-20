@@ -12,8 +12,19 @@ use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
 
 class ValidatorIntegrationTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * The validation facade.
+     */
     private $validationFacade = null;
 
+    /**
+     * The object to be tested.
+     */
+    private $testObject;
+
+    /**
+     * Set up the testing object.
+     */
     public function setUp()
     {
         $respectValidation = new \Respect\Validation\Validator();

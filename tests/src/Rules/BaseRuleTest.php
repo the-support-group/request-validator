@@ -9,8 +9,19 @@ use TheSupportGroup\Common\Validator\Helpers\ValidationResultProcessor;
 
 class BaseRuleTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * Validation provider mock.
+     */
     private $validationProviderMock = null;
 
+    /**
+     * The object to be tested.
+     */
+    private $testObject;
+
+    /**
+     * Set up the testing object.
+     */
     public function setup()
     {
         $validationResult = true;

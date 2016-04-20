@@ -9,6 +9,14 @@ use TheSupportGroup\Common\Validator\Contracts\Helpers\RulesFactoryInterface;
 
 class ValidatorFacadeTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * The object to be tested.
+     */
+    private $testObject;
+
+    /**
+     * Set up the testing object.
+     */
     public function setUp()
     {
         $validationProviderMock = $this->getMockBuilder(ValidationAdaptor::class)

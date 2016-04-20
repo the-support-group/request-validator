@@ -4,58 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "44d0653fe140bbffd59a924aac8b800a",
-    "content-hash": "8f95290a6e5f79c830cd0333bbe7ab85",
+    "hash": "8d5b02fe99a88cb9ac4030bd85f662da",
+    "content-hash": "89f3525ab38909b3fec834e63a3f714a",
     "packages": [
-        {
-            "name": "the-support-group/validation-adaptor",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/the-support-group/validation-adaptor.git",
-                "reference": "6c552edf65e105ed98c77092e6e7f973da70aca4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/the-support-group/validation-adaptor/zipball/6c552edf65e105ed98c77092e6e7f973da70aca4",
-                "reference": "6c552edf65e105ed98c77092e6e7f973da70aca4",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.0",
-                "the-support-group/validator-interop": "dev-master"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "TheSupportGroup\\Common\\ValidationAdaptor\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "Abdul Wahab Qureshi",
-                    "email": "abdul@easyfundraising.org.uk"
-                }
-            ],
-            "description": "Open source PHP validation provider",
-            "time": "2016-04-17 16:53:29"
-        },
         {
             "name": "the-support-group/validator-interop",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/the-support-group/validation-interop.git",
-                "reference": "9764efe083698d03c2e97b1bc480ed9001f37877"
+                "reference": "2ef91e8b6da3e1aca4803a558c8543e407977241"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/the-support-group/validation-interop/zipball/9764efe083698d03c2e97b1bc480ed9001f37877",
-                "reference": "9764efe083698d03c2e97b1bc480ed9001f37877",
+                "url": "https://api.github.com/repos/the-support-group/validation-interop/zipball/2ef91e8b6da3e1aca4803a558c8543e407977241",
+                "reference": "2ef91e8b6da3e1aca4803a558c8543e407977241",
                 "shasum": ""
             },
             "require": {
@@ -75,7 +38,7 @@
                 }
             ],
             "description": "PHP validation interface provider",
-            "time": "2016-04-18 14:19:24"
+            "time": "2016-04-19 13:13:47"
         }
     ],
     "packages-dev": [
@@ -1095,6 +1058,44 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2016-03-04 07:55:57"
+        },
+        {
+            "name": "the-support-group/validation-adaptor",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/the-support-group/validation-adaptor.git",
+                "reference": "779a9f691cc0190986b18272f01cebca12798155"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/the-support-group/validation-adaptor/zipball/779a9f691cc0190986b18272f01cebca12798155",
+                "reference": "779a9f691cc0190986b18272f01cebca12798155",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "the-support-group/validator-interop": "dev-master"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.5",
+                "respect/validation": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TheSupportGroup\\Common\\ValidationAdaptor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Abdul Wahab Qureshi",
+                    "email": "abdul@easyfundraising.org.uk"
+                }
+            ],
+            "description": "Open source PHP validation provider",
+            "time": "2016-04-19 13:15:30"
         }
     ],
     "aliases": [],
