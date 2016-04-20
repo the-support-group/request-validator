@@ -20,6 +20,6 @@ class Same extends BaseRule
 
     public function getMessage()
     {
-        return 'Field :field: should have same value with :value: field';
+        return 'Field :field: should have same value with :rule: field';
     }
 }

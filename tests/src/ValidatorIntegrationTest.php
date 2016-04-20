@@ -20,10 +20,12 @@ class ValidatorIntegrationTest extends PHPUnit_Framework_TestCase
         $validationProviderMock = new ValidationAdaptor($respectValidation);
         $errorBag = new Helpers\FieldsErrorBag();
         $validationResultProcessorMock = new Helpers\ValidationResultProcessor($errorBag);
+        $rulesFactory = new Helpers\RulesFactory();
 
         $this->validationFacade = new ValidatorFacade(
             $validationProviderMock,
-            $validationResultProcessorMock
+            $validationResultProcessorMock,
+            $rulesFactory
         );
     }
 

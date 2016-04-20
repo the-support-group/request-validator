@@ -14,7 +14,7 @@ class RulesFactory implements RulesFactoryInterface
      *
      * @return mixed
      */
-    public static function createRule(
+    public function createRule(
         $ruleName,
         $config,
         $params,

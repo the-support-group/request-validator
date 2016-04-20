@@ -5,52 +5,90 @@ namespace TheSupportGroup\Common\ValidatorTests\Rules;
 use PHPUnit_Framework_TestCase;
 use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
 use TheSupportGroup\Common\Validator\Rules\BaseRule;
+use TheSupportGroup\Common\Validator\Helpers\ValidationResultProcessor;
 
 class BaseRuleTest extends PHPUnit_Framework_TestCase
 {
-    
-    
+    private $validationProviderMock = null;
+
     public function setup()
     {
         $validationResult = true;
 
-        $validationProviderMock = $this->getMock(ValidationProviderInterface::class);
+        $this->validationProviderMock = $this->getMock(ValidationProviderInterface::class);
 
-        $validationProviderMock->expects($this->any())
+        $this->validationProviderMock->expects($this->any())
             ->method('rule')
             ->will($this->returnSelf());
 
-        $validationProviderMock->expects($this->any())
+        $this->validationProviderMock->expects($this->any())
             ->method('validate')
             ->will($this->returnValue($validationResult));
 
-        $this->testObject = $this->getMockForAbstractClass(BaseRule::class, [
+        $this->testObject = $this->getMockBuilder(BaseRule::class)
+            ->setConstructorArgs([
                 ['fieldRules' => 'required'],
-                $validationProviderMock
-            ]);
+                $this->validationProviderMock
+            ])
+            ->setMockClassName('BaseRuleTestClass')
+            ->getMockForAbstractClass();
+    }
+
+    /**
+     * test_Call Test that __call executes as expected.
+     */
+    public function test_Call()
+    {
+        // Prepare / Mock
+        $params = ['I am the params array'];
+
+        $this->validationProviderMock->expects($this->once())
+            ->method('getMappedMethod')
+            ->with('randomizer')
+            ->will($this->returnArgument(0));
+        $this->validationProviderMock->expects($this->once())
+            ->method('rule')
+            ->with('randomizer', [$params])
+            ->will($this->returnSelf());
+    
+        // Execute
+        $result = $this->testObject->randomizer($params);
+    
+        // Assert Result
+        $this->assertInstanceOf(BaseRule::class, $result);
     }
 
     public function testValidate()
     {
-        $rule = '';
-        $value = '';
+        $value = 'good one';
 
-        $result = $this->testObject->validate($rule, $value);
+        $this->validationProviderMock->expects($this->once())
+            ->method('validate')
+            ->with($value)
+            ->will($this->returnSelf());
+
+        $result = $this->testObject->validate($value);
 
         // Assert Result
-        //assert
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue($result);
     }
 
-    public function testGetConfig()
+    public function testGetConfigWithNull()
     {
         $type = '';
 
         $result = $this->testObject->getConfig($type);
 
         // Assert Result
-        //assert
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertEquals([], $result);
+    }
+
+    public function testGetConfigWithoutType()
+    {
+        $result = $this->testObject->getConfig();
+
+        // Assert Result
+        $this->assertEquals(['fieldRules' => 'required'], $result);
     }
 
     public function testHasRule()
@@ -60,28 +98,18 @@ class BaseRuleTest extends PHPUnit_Framework_TestCase
         $result = $this->testObject->hasRule($rule);
 
         // Assert Result
-        //assert
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertFalse($result);
     }
 
-    public function testSetParams()
+    public function testSetGetParams()
     {
-        $params = [];
+        $params = ['good' => 'one'];
 
         $result = $this->testObject->setParams($params);
 
         // Assert Result
-        //assert
-        $this->markTestIncomplete('This test has not been implemented yet.');
-    }
-
-    public function testGetParams()
-    {
-        $result = $this->testObject->getParams();
-
-        // Assert Result
-        //assert
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertInstanceOf(BaseRule::class, $result);
+        $this->assertEquals($params, $this->testObject->getParams());
     }
 
     /**
@@ -95,39 +123,6 @@ class BaseRuleTest extends PHPUnit_Framework_TestCase
         $result = $this->testObject->getRuleName();
     
         // Assert Result
-        //assert
-        $this->markTestIncomplete('This test has not been implemented yet.');
-    }
-
-    /**
-     * testGetMessage Test that getMessage executes as expected.
-     */
-    public function testGetMessage()
-    {
-        // Prepare / Mock
-        //nm
-    
-        // Execute
-        $result = $this->testObject->getMessage();
-    
-        // Assert Result
-        //assert
-        $this->markTestIncomplete('This test has not been implemented yet.');
-    }
-
-    /**
-     * testIsValid Test that isValid executes as expected.
-     */
-    public function testIsValid()
-    {
-        // Prepare / Mock
-        //nm
-    
-        // Execute
-        $result = $this->testObject->isValid();
-    
-        // Assert Result
-        //assert
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertEquals('BaseRuleTestClass', $result);
     }
 }

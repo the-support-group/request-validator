@@ -6,6 +6,7 @@ use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
 use TheSupportGroup\Common\Validator\Rules\BaseRule;
 use TheSupportGroup\Common\Validator\Validator;
 use TheSupportGroup\Common\Validator\Contracts\Helpers\ValidationResultProcessorInterface;
+use TheSupportGroup\Common\Validator\Contracts\Helpers\FieldsErrorBagInterface;
 
 class ValidationResultProcessor implements ValidationResultProcessorInterface
 {
@@ -17,7 +18,7 @@ class ValidationResultProcessor implements ValidationResultProcessorInterface
      * @param array $userMessages
      */
     public function __construct(
-        FieldsErrorBag $fieldsErrorBag,
+        FieldsErrorBagInterface $fieldsErrorBag,
         array $userMessages = []
     ) {
         $this->fieldsErrorBag = $fieldsErrorBag;
@@ -43,7 +44,7 @@ class ValidationResultProcessor implements ValidationResultProcessorInterface
      */
     public function hasErrors($fieldName)
     {
-        return (bool) count($this->getErrorMessages($fieldName));
+        return (bool) count($this->fieldsErrorBag->getErrorMessages($fieldName));
     }
 
     /**
@@ -58,7 +59,9 @@ class ValidationResultProcessor implements ValidationResultProcessorInterface
         if ($field) {
             return isset($this->fieldsErrorBag->getErrorMessages()[$field]) ? $this->fieldsErrorBag->getErrorMessages()[$field] : [];
         }
+
         $messages = [];
+
         // Pass in the variable.
         $errorMessages = $this->fieldsErrorBag->getErrorMessages();
         array_walk_recursive($errorMessages, function ($message) use (&$messages) {
@@ -73,7 +76,7 @@ class ValidationResultProcessor implements ValidationResultProcessorInterface
      *
      * @return array
      */
-    public function raw()
+    public function getRawErrors()
     {
         return $this->fieldsErrorBag->getErrorMessages();
     }
@@ -119,6 +122,8 @@ class ValidationResultProcessor implements ValidationResultProcessorInterface
      * Choosing error message: custom or default.
      *
      * @param $instance
+     * 
+     * @return $this
      */
     public function chooseErrorMessage(BaseRule $instance)
     {
@@ -137,11 +142,13 @@ class ValidationResultProcessor implements ValidationResultProcessorInterface
                 $ruleErrorMessage,
                 [
                     ':field:' => $fieldName,
-                    ':value:' => $ruleValue,
+                    ':rule:' => $ruleValue,
                     ':param:' => $ruleParams,
                 ]
             )
         );
+
+        return $this;
     }
 
     /**

@@ -1,5 +1,7 @@
 <?php
 
+namespace TheSupportGroup\Common\ValidatorTests\Helpers;
+
 use PHPUnit_Framework_TestCase;
 use TheSupportGroup\Common\Validator\Helpers\FieldsErrorBag;
 

@@ -7,14 +7,14 @@ use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
 interface RulesFactoryInterface
 {
     /**
-     * @param $ruleName
-     * @param $config
-     * @param $params
+     * @param string $ruleName
+     * @param array $config
+     * @param array $params
      * @param ValidationProviderInterface $validationProvider
      *
      * @return mixed
      */
-    public static function createRule(
+    public function createRule(
         $ruleName,
         $config,
         $params,

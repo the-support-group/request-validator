@@ -1,5 +1,7 @@
 <?php
 
+namespace TheSupportGroup\Common\ValidatorTests\Helpers;
+
 use PHPUnit_Framework_TestCase;
 use TheSupportGroup\Common\Validator\Rules\BaseRule;
 use TheSupportGroup\Common\Validator\Helpers\RulesFactory;
@@ -20,9 +22,11 @@ class RulesFactoryTest extends PHPUnit_Framework_TestCase
         $validationProviderMock = $this->getMockBuilder(ValidationProviderInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
+
+        $rulesFactory = new RulesFactory();
     
         // Execute
-        $result = RulesFactory::createRule(
+        $result = $rulesFactory->createRule(
             $ruleName,
             $config,
             $params,

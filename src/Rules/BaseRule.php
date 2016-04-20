@@ -11,8 +11,19 @@ abstract class BaseRule
     const CONFIG_DATA = 'data';
     const CONFIG_FIELD_RULES = 'fieldRules';
 
+    /**
+     * @var array $config
+     */
     private $config;
+
+    /**
+     * @var array $params
+     */
     private $params;
+
+    /**
+     * @var ValidationProviderInterface $validator
+     */
     private $validator;
 
     /**
@@ -39,10 +50,10 @@ abstract class BaseRule
         $validatorMethod = $this->validationProvider->getMappedMethod($method);
 
         // Try running rule against params.
-        $validationResultProcessor = $this->buildRule($validatorMethod, $params);
+        $this->buildRule($validatorMethod, $params);
 
-        // Return resulting method.
-        return $validationResultProcessor;
+        // Return self for next call to be made via the base Rule.
+        return $this;
     }
 
     /**

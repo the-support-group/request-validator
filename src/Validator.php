@@ -3,13 +3,15 @@
 namespace TheSupportGroup\Common\Validator;
 
 use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
-use TheSupportGroup\Common\Validator\Helpers\RulesFactory;
-use TheSupportGroup\Common\Validator\Helpers\ValidationResultProcessor;
+use TheSupportGroup\Common\Validator\Contracts\Helpers\ValidationResultProcessorInterface;
 use TheSupportGroup\Common\Validator\Rules\BaseRule;
+use TheSupportGroup\Common\Validator\Contracts\Helpers\RulesFactoryInterface;
 
 final class Validator
 {
-    /** @var ValidationResultProcessor */
+    /**
+     * @var ValidationResultProcessor
+     */
     private static $ValidationResultProcessor = null;
 
     /**
@@ -39,13 +41,22 @@ final class Validator
     private static $config = [];
 
     /**
+     * Rules factory.
+     */
+    private $rulesFactory;
+
+    /**
+     * @param ValidationProviderInterface $validationProvider
+     * @param ValidationResultProcessorInterface $validationResultProcessor
+     * @param RulesFactoryInterface $rulesFactory
      * @param array $inputData
      * @param array $rules
      * @param array $errorMessages
      */
     public function __construct(
         ValidationProviderInterface $validationProvider,
-        ValidationResultProcessor $validationResultProcessor,
+        ValidationResultProcessorInterface $validationResultProcessor,
+        RulesFactoryInterface $rulesFactory,
         array $inputData,
         array $rules = [],
         array $errorMessages = []
@@ -55,6 +66,7 @@ final class Validator
         $this->validationProvider = $validationProvider;
         $this->validationResultProcessor = $validationResultProcessor;
         $this->validationResultProcessor->fieldsErrorBag->setUserMessages($errorMessages);
+        $this->rulesFactory = $rulesFactory;
     }
 
     /**
@@ -113,7 +125,7 @@ final class Validator
                 self::$config[BaseRule::CONFIG_DATA] = $data;
                 self::$config[BaseRule::CONFIG_FIELD_RULES] = $fieldRules;
 
-                $ruleInstance = RulesFactory::createRule(
+                $ruleInstance = $this->rulesFactory->createRule(
                     $ruleName,
                     self::$config,
                     [

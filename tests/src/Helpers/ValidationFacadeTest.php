@@ -5,6 +5,7 @@ namespace TheSupportGroup\Common\ValidatorTests\Helpers;
 use PHPUnit_Framework_TestCase;
 use TheSupportGroup\Common\Validator\Helpers;
 use TheSupportGroup\Common\ValidationAdaptor\ValidationAdaptor;
+use TheSupportGroup\Common\Validator\Contracts\Helpers\RulesFactoryInterface;
 
 class ValidatorFacadeTest extends PHPUnit_Framework_TestCase
 {
@@ -21,9 +22,13 @@ class ValidatorFacadeTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        $rulesFactoryMock = $this->getMockBuilder(RulesFactoryInterface::class)
+            ->getMock();
+
         $this->testObject = new Helpers\ValidatorFacade(
             $validationProviderMock,
-            $validationResultProcessorMock
+            $validationResultProcessorMock,
+            $rulesFactoryMock
         );
     }
 
