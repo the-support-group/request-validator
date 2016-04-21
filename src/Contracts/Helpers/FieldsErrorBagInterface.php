@@ -8,7 +8,8 @@ interface FieldsErrorBagInterface
      * Set custom error messages.
      * 
      * @param array $userMessages The custom user messages.
-     * @return \TheSupportGroup\Common\Validator\Helpers\FieldsErrorBag
+     *
+     * @return FieldsErrorBagInterface
      */
     public function setUserMessages($userMessages);
 
@@ -35,7 +36,8 @@ interface FieldsErrorBagInterface
      *
      * @param $fieldName
      * @param $message
-     * @return \TheSupportGroup\Common\Validator\Helpers\FieldsErrorBag
+     *
+     * @return FieldsErrorBagInterface
      */
     public function add($fieldName, $message);
 
