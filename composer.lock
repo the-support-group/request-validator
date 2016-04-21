@@ -4,12 +4,12 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8d5b02fe99a88cb9ac4030bd85f662da",
-    "content-hash": "89f3525ab38909b3fec834e63a3f714a",
+    "hash": "5439ce2713f3de9a1eb72b04be06cc60",
+    "content-hash": "2417e1653ec6c891e2bafa0fe1f3d4f6",
     "packages": [
         {
             "name": "the-support-group/validator-interop",
-            "version": "dev-master",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/the-support-group/validation-interop.git",
@@ -1061,21 +1061,21 @@
         },
         {
             "name": "the-support-group/validation-adaptor",
-            "version": "dev-master",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/the-support-group/validation-adaptor.git",
-                "reference": "779a9f691cc0190986b18272f01cebca12798155"
+                "reference": "e9a7da85eec590fc4429ea19d6091987d76e5705"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/the-support-group/validation-adaptor/zipball/779a9f691cc0190986b18272f01cebca12798155",
-                "reference": "779a9f691cc0190986b18272f01cebca12798155",
+                "url": "https://api.github.com/repos/the-support-group/validation-adaptor/zipball/e9a7da85eec590fc4429ea19d6091987d76e5705",
+                "reference": "e9a7da85eec590fc4429ea19d6091987d76e5705",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5.0",
-                "the-support-group/validator-interop": "dev-master"
+                "the-support-group/validator-interop": "~0.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.5",
@@ -1095,15 +1095,12 @@
                 }
             ],
             "description": "Open source PHP validation provider",
-            "time": "2016-04-19 13:15:30"
+            "time": "2016-04-21 10:28:19"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "the-support-group/validator-interop": 20,
-        "the-support-group/validation-adaptor": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
