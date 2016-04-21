@@ -93,8 +93,6 @@ build:
   environment:
     php:
       version: "5.5.9"
-    hosts:
-        database.dev: '127.0.0.1'
 filter:
   excluded_paths:
     - tests/*
