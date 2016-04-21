@@ -11,7 +11,6 @@
 
 namespace TheSupportGroup\Common\Validator\Rules;
 
-use Exception;
 use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
 
 abstract class BaseRule

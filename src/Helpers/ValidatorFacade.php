@@ -12,11 +12,10 @@
 namespace TheSupportGroup\Common\Validator\Helpers;
 
 use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
-use TheSupportGroup\Common\Validator\Rules\BaseRule;
-use TheSupportGroup\Common\Validator\Validator;
-use TheSupportGroup\Common\Validator\Contracts\Helpers\ValidationResultProcessorInterface;
-use TheSupportGroup\Common\Validator\Contracts\Helpers\ValidationFacadeInterface;
 use TheSupportGroup\Common\Validator\Contracts\Helpers\RulesFactoryInterface;
+use TheSupportGroup\Common\Validator\Contracts\Helpers\ValidationFacadeInterface;
+use TheSupportGroup\Common\Validator\Contracts\Helpers\ValidationResultProcessorInterface;
+use TheSupportGroup\Common\Validator\Validator;
 
 class ValidatorFacade implements ValidationFacadeInterface
 {

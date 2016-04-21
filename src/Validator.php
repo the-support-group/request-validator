@@ -12,9 +12,9 @@
 namespace TheSupportGroup\Common\Validator;
 
 use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
+use TheSupportGroup\Common\Validator\Contracts\Helpers\RulesFactoryInterface;
 use TheSupportGroup\Common\Validator\Contracts\Helpers\ValidationResultProcessorInterface;
 use TheSupportGroup\Common\Validator\Rules\BaseRule;
-use TheSupportGroup\Common\Validator\Contracts\Helpers\RulesFactoryInterface;
 
 final class Validator
 {
