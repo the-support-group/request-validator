@@ -1,8 +1,6 @@
-# PHP Request Validator
+# PHP Data Validator
 
 Make your apps validation easily (inspired by Laravel Validation)
-
-[![Build Status](https://travis-ci.org/progsmile/request-validator.svg?branch=master)](http://travis-ci.org/progsmile/request-validator)  [![Total Downloads](https://poser.pugx.org/progsmile/request-validator/d/total)](https://packagist.org/packages/progsmile/request-validator) [![License](https://poser.pugx.org/progsmile/request-validator/license.svg)](https://packagist.org/packages/progsmile/request-validator)
 
 ---
 
@@ -17,7 +15,6 @@ Suggested Links:
 - [Feature Guide](/docs/feature-guide.md)
 - Rules
     - [Existing Rules](/docs/rules.md)
-    - [Data Provider](/docs/rules-database.md)
     - [Customization](/docs/rules-customization.md)
     - [Formatting Message](/docs/formatting-message.md)
 - [Integrations](/docs/integrations.md)
@@ -29,6 +26,10 @@ Suggested Links:
 ```php
 <?php
 
+// Prepare the input data.
+$inputData = $_POST;
+
+// Prepare rules to be applied on the input data.
 $rules = [
     # firstname and lastname must exists
     # they should be alphanumeric
@@ -83,7 +84,8 @@ $rules = [
     'elevatorFloor'       => 'notIn:13, 18, 3, 4',
 ];
 
-$customMessage = [
+// Custom error messages for rules in case validation does not pass.
+$customMessages = [
    'info[country].alpha' => 'Only letters please',
    'email.required'      => 'Field :field: is required',
    'email.email'         => 'Email has bad format',
@@ -91,41 +93,55 @@ $customMessage = [
    'elevatorFloor.notIn' => 'Oops',
 ];
 
-$v = V::make($_POST, $rules, $customMessage);
+// Prep up the validator, ideally done using DI.
+$respectValidation = new \Respect\Validation\Validator();
+$validationProviderMock = new ValidationAdaptor($respectValidation);
+$errorBag = new Helpers\FieldsErrorBag();
+$validationResultProcessorMock = new Helpers\ValidationResultProcessor($errorBag);
+$rulesFactory = new Helpers\RulesFactory();
 
-# for specific field
-# you can use below code.
-$v->lastname->passes();
-$v->lastname->fails();
+// Create the validation facade that will give us our validation object to work with.
+$validationFacade = new ValidatorFacade(
+    $validationProviderMock,
+    $validationResultProcessorMock,
+    $rulesFactory
+);
 
-# if you're required to check everything
-# and there must no failing validation
-$v->passes();
-$v->fails();
+// Run validation on input data.
+$validationResult = $validationFacade->validate($inputData, $rules, $customMessages);
 
-# get first error message
-$v->first();
+// Check if there are any errors.
+$validationResult->hasErrors();
 
-# get first error for `firstname`
-$v->first('lastname');
-$v->firstname->first();
+// Count number of errors.
+$validationResult->count();
 
-# return first error message from each field
-$v->firsts();
+// Get all errors.
+$validationResult->getErrors();
 
-# get all messages (with param for concrete field)
-$v->messages();
-$v->messages('password');
+// Get error for a specific field.
+$validationResult->getErrors('username');
 
-# get all `password` messages
-$v->password->messages();
+// Get raw error messages with keys.
+$validationResult->getRawErrors();
 
-# get 2d array with fields and messages
-$v->raw();
+// Get only the first error message for each field.
+$validationResult->firsts();
 
-# to append a message
-$v->add('someField', 'Something is wrong with this');
-```
+// Get the first error message for a specific field.
+$validationResult->first('username');
+
+// Appending an error message.
+$validationResult->fieldsErrorBag->add($fieldName, $message);
+
+### Error message variables.
+
+You can use 3 variables in your error messages, these will be dynamically replaced by the actual values being used at the time. These are:
+
+:field: => The field being validated.
+:rule: => The rule being applied.
+:value: => The value being validated against.
+
 
 <a name="contributing"></a>
 ## Contributing :octocat:
@@ -136,7 +152,7 @@ Dear contributors , the project is just started and it is not stable yet, we lov
 <a name="testing"></a>
 ## Testing
 
-This testing suite uses [Travis CI](https://travis-ci.org/) for each run. Every commit pushed to this repository will queue a build into the continuous integration service and will run all tests to ensure that everything is going well and the project is stable.
+This project is mostly unit tested down to its core.
 
 The testing suite can be run on your own machine. The main dependency is [PHPUnit](https://github.com/sebastianbergmann/phpunit) which can be installed using [Composer](http://getcomposer.org):
 
@@ -144,17 +160,6 @@ The testing suite can be run on your own machine. The main dependency is [PHPUni
 # run this command from project root
 $ composer install --dev --prefer-source
 ```
-
-A MySQL database is also required for several tests. Follow these instructions to create the database:
-
-```sh
-echo 'create database valid charset=utf8mb4 collate=utf8mb4_unicode_ci;' | mysql -u root
-cat tests/dist/schema.sql | mysql valid -u root
-```
-
-For these tests we use the user `root` without a password. You may need to change this in `tests/TestHelper.php` file.
-
-Once the database is created, run the tests on a terminal:
 
 ```sh
 vendor/bin/phpunit --configuration phpunit.xml --coverage-text
@@ -165,5 +170,4 @@ For additional information see [PHPUnit The Command-Line Test Runner](http://php
 <a name="license"></a>
 ## License
 
-PHP Request Validator is open-sourced software licensed under the [GNU GPL](LICENSE).
-© 2016 Denis Klimenko and <a href="https://github.com/progsmile/request-validator/graphs/contributors">all the contributors</a>.
+PHP Data Validator is open-sourced software licensed under the [GNU GPL](LICENSE).

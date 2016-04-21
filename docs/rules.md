@@ -5,7 +5,6 @@
  - [Date and Time Format](#data-and-time-format)
  - [Email](#email)
  - [Equals](#equals)
- - [Exists](#exists)
  - [Json](#json)
  - [In](#in)
  - [Image](#image)
@@ -18,7 +17,6 @@
  - [Required](#required)
  - [Same](#same)
  - [Size](#size)
- - [Unique](#unique)
  - [Url](#url)
 
 <a name="alpha"></a>
@@ -91,18 +89,6 @@ The field equals to value
 
 'secretCode' => 'mmx'  //true
 'secretCode' => 'lol'  //false
-```
-
-
-<a name="exists"></a>
-### Exists
-Searches for record in table, true if exists
-```php
-
-'email' => 'exists:users'  // email - attribute, users - table
-
-'email' => 'bob@matros.com'   //true
-'email' => 'boby@matros.com'  //false
 ```
 
 <a name="json"></a>
@@ -245,16 +231,6 @@ Check if string is the same size
 
 'keyCode' => 'yes' //true
 'keyCode' => 'no'  //false
-```
-
-<a name="unique"></a>
-### Unique
-Checks if value is unique in table
-```php
-'email' => 'unique:users'  // email - attribute, users - table
-
-'email' => 'john@doe.com' //true
-'email' => 'bob@ubi.mmx'  //false
 ```
 
 <a name="url"></a>

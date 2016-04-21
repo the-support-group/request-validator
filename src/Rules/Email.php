@@ -1,8 +1,19 @@
 <?php
 
+/**
+ * @author: Abdul Qureshi. <abdul@easyfundraising.org.uk>
+ * 
+ * This file has been modified from the original source.
+ * See original here:
+ *
+ * @link: https://github.com/progsmile/request-validator
+ */
+
 namespace TheSupportGroup\Common\Validator\Rules;
 
-class Email extends BaseRule
+use TheSupportGroup\Common\Validator\Contracts\Rules\RuleInterface;
+
+class Email extends BaseRule implements RuleInterface
 {
     public function isValid()
     {

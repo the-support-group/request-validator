@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * @author: Abdul Qureshi. <abdul@easyfundraising.org.uk>
+ * 
+ * This file has been modified from the original source.
+ * See original here:
+ *
+ * @link: https://github.com/progsmile/request-validator
+ */
+
 namespace TheSupportGroup\Common\Validator\Helpers;
 
 use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;

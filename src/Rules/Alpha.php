@@ -1,9 +1,23 @@
 <?php
 
+/**
+ * @author: Abdul Qureshi. <abdul@easyfundraising.org.uk>
+ * 
+ * This file has been modified from the original source.
+ * See original here:
+ *
+ * @link: https://github.com/progsmile/request-validator
+ */
+
 namespace TheSupportGroup\Common\Validator\Rules;
 
-class Alpha extends BaseRule
+use TheSupportGroup\Common\Validator\Contracts\Rules\RuleInterface;
+
+class Alpha extends BaseRule implements RuleInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function isValid()
     {
         if ($this->isNotRequiredAndEmpty()) {
@@ -16,9 +30,7 @@ class Alpha extends BaseRule
     }
 
     /**
-     * Returns error message from rule.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getMessage()
     {
