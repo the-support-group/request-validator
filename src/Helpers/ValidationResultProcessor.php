@@ -23,7 +23,6 @@ class ValidationResultProcessor implements ValidationResultProcessorInterface
     public $fieldsErrorBag = null;
 
     /**
-     * @param ValidationProviderInterface $validationProvider
      * @param array $userMessages
      */
     public function __construct(

@@ -94,7 +94,6 @@ final class Validator
      *
      * @param array $data user request data
      * @param array $rules validation rules
-     * @param array $userMessages custom error messages
      *
      * @return ValidatorRule
      */
@@ -159,7 +158,7 @@ final class Validator
      *
      * @param array $data
      *
-     * @return array
+     * @return string
      */
     private function prepareData(array $data)
     {
