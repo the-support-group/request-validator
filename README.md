@@ -27,6 +27,35 @@ Suggested Links:
 
 <a name="quick-start"></a>
 ## Quick start :rocket:
+
+Setting up the validationFacade:
+
+```php
+<?php
+
+use Respect\Validation\Validator as RespectValidator;
+use TheSupportGroup\Common\Validator\Helpers;
+use TheSupportGroup\Common\ValidationAdaptor\ValidationAdaptor;
+
+// Prep up the validator, ideally done using DI.
+$respectValidator = new RespectValidator();
+$errorBag = new Helpers\FieldsErrorBag();
+
+// Note that any library can be used as long as it is accepted by the ValidationAdaptor.
+$validationProvider = new ValidationAdaptor($respectValidator);
+$validationResultProcessor = new Helpers\ValidationResultProcessor($errorBag);
+$rulesFactory = new Helpers\RulesFactory();
+
+// Create the validation facade that will give us our validation object to work with.
+$validationFacade = new ValidatorFacade(
+    $validationProvider,
+    $validationResultProcessor,
+    $rulesFactory
+);
+
+```
+Validating data:
+
 ```php
 <?php
 
@@ -97,23 +126,13 @@ $customMessages = [
    'elevatorFloor.notIn' => 'Oops',
 ];
 
-// Prep up the validator, ideally done using DI.
-$respectValidation = new \Respect\Validation\Validator();
-$validationProviderMock = new ValidationAdaptor($respectValidation);
-$errorBag = new Helpers\FieldsErrorBag();
-$validationResultProcessorMock = new Helpers\ValidationResultProcessor($errorBag);
-$rulesFactory = new Helpers\RulesFactory();
-
-// Create the validation facade that will give us our validation object to work with.
-$validationFacade = new ValidatorFacade(
-    $validationProviderMock,
-    $validationResultProcessorMock,
-    $rulesFactory
-);
-
 // Run validation on input data.
 $validationResult = $validationFacade->validate($inputData, $rules, $customMessages);
 
+```
+Methods available on the validationResult object:
+
+```php
 // Check if there are any errors.
 $validationResult->hasErrors();
 
@@ -143,10 +162,11 @@ $validationResult->fieldsErrorBag->add($fieldName, $message);
 
 You can use 3 variables in your error messages, these will be dynamically replaced by the actual values being used at the time. These are:
 
+```
 :field: => The field being validated.
 :rule: => The rule being applied.
 :value: => The value being validated against.
-
+```
 
 <a name="contributing"></a>
 ## Contributing :octocat:
