@@ -133,6 +133,7 @@ $validationResult->first('username');
 
 // Appending an error message.
 $validationResult->fieldsErrorBag->add($fieldName, $message);
+```
 
 ### Error message variables.
 
