@@ -12,10 +12,10 @@
 namespace TheSupportGroup\Common\Validator\Helpers;
 
 use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
+use TheSupportGroup\Common\Validator\Contracts\Helpers\FieldsErrorBagInterface;
+use TheSupportGroup\Common\Validator\Contracts\Helpers\ValidationResultProcessorInterface;
 use TheSupportGroup\Common\Validator\Rules\BaseRule;
 use TheSupportGroup\Common\Validator\Validator;
-use TheSupportGroup\Common\Validator\Contracts\Helpers\ValidationResultProcessorInterface;
-use TheSupportGroup\Common\Validator\Contracts\Helpers\FieldsErrorBagInterface;
 
 class ValidationResultProcessor implements ValidationResultProcessorInterface
 {
@@ -23,7 +23,6 @@ class ValidationResultProcessor implements ValidationResultProcessorInterface
     public $fieldsErrorBag = null;
 
     /**
-     * @param ValidationProviderInterface $validationProvider
      * @param array $userMessages
      */
     public function __construct(
