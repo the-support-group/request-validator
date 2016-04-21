@@ -2,6 +2,10 @@
 
 Make your apps validation easily (inspired by Laravel Validation)
 
+[![Code Coverage](https://scrutinizer-ci.com/g/the-support-group/request-validator/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/the-support-group/request-validator/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/the-support-group/request-validator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/the-support-group/request-validator/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/the-support-group/request-validator/badges/build.png?b=master)](https://scrutinizer-ci.com/g/the-support-group/request-validator/build-status/master)
+
 ---
 
 Page Index:
