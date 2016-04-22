@@ -6,6 +6,7 @@ interface RuleInterface
 {
     /**
      * Check if the value is valid when the rule is applied.
+     * @return boolean
      */
     public function isValid();
 

@@ -12,9 +12,9 @@
 namespace TheSupportGroup\Common\Validator;
 
 use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
+use TheSupportGroup\Common\Validator\Contracts\Helpers\RulesFactoryInterface;
 use TheSupportGroup\Common\Validator\Contracts\Helpers\ValidationResultProcessorInterface;
 use TheSupportGroup\Common\Validator\Rules\BaseRule;
-use TheSupportGroup\Common\Validator\Contracts\Helpers\RulesFactoryInterface;
 
 final class Validator
 {
@@ -94,7 +94,6 @@ final class Validator
      *
      * @param array $data user request data
      * @param array $rules validation rules
-     * @param array $userMessages custom error messages
      *
      * @return ValidatorRule
      */
@@ -159,7 +158,7 @@ final class Validator
      *
      * @param array $data
      *
-     * @return array
+     * @return string
      */
     private function prepareData(array $data)
     {

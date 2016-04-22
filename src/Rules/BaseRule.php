@@ -49,7 +49,7 @@ abstract class BaseRule
     /**
      * Validator calls captured and remapped here.
      *
-     * @return object Validator rule object.
+     * @return BaseRule Validator rule object.
      */
     public function __call($method, array $params = array())
     {
@@ -85,7 +85,7 @@ abstract class BaseRule
      *
      * @param string $type
      *
-     * @return array
+     * @return string
      */
     public function getConfig($type = self::CONFIG_ALL)
     {
@@ -99,7 +99,7 @@ abstract class BaseRule
     /**
      * If field has specific rule.
      *
-     * @param $rule
+     * @param string $rule
      *
      * @return bool
      */
