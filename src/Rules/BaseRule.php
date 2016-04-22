@@ -8,10 +8,8 @@
  *
  * @link: https://github.com/progsmile/request-validator
  */
-
 namespace TheSupportGroup\Common\Validator\Rules;
 
-use Exception;
 use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
 
 abstract class BaseRule
@@ -31,9 +29,9 @@ abstract class BaseRule
     private $params;
 
     /**
-     * @var ValidationProviderInterface $validator
+     * @var ValidationProviderInterface $validationProvider
      */
-    private $validator;
+    private $validationProvider;
 
     /**
      * BaseRule constructor.

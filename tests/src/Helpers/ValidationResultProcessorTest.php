@@ -43,10 +43,10 @@ class ValidationResultProcessorTest extends PHPUnit_Framework_TestCase
      * testCount Test that count executes as expected.
      */
     public function testCount()
-    {    
+    {
         // Execute
         $result = $this->testObject->count();
-    
+
         // Assert Result
         $this->assertEquals(0, $result);
 
@@ -56,7 +56,7 @@ class ValidationResultProcessorTest extends PHPUnit_Framework_TestCase
 
         // Execute
         $result = $this->testObject->count();
-    
+
         // Assert Result
         $this->assertEquals(2, $result);
     }
@@ -68,15 +68,15 @@ class ValidationResultProcessorTest extends PHPUnit_Framework_TestCase
     {
         // Prepare / Mock
         $fieldName = 'password';
-        
+
         $this->testObject->fieldsErrorBag->expects($this->any())
             ->method('getErrorMessages')
             ->with($fieldName)
             ->will($this->returnValue(['one', 'two']));
-    
+
         // Execute
         $result = $this->testObject->hasErrors($fieldName);
-    
+
         // Assert Result
         $this->assertTrue($result);
     }
@@ -89,17 +89,17 @@ class ValidationResultProcessorTest extends PHPUnit_Framework_TestCase
         // Prepare / Mock
         $field = 'username';
         $usernameMessage = 'bad username';
-        
+
         $this->testObject->fieldsErrorBag->expects($this->atleastOnce())
             ->method('getErrorMessages')
             ->will($this->returnValue([
                 'username' => $usernameMessage,
                 'two' => 'whatever'
             ]));
-    
+
         // Execute
         $result = $this->testObject->getErrors($field);
-    
+
         // Assert Result
         $this->assertEquals($usernameMessage, $result);
     }
@@ -123,14 +123,14 @@ class ValidationResultProcessorTest extends PHPUnit_Framework_TestCase
             'bad username',
             'whatever'
         ];
-        
+
         $this->testObject->fieldsErrorBag->expects($this->atleastOnce())
             ->method('getErrorMessages')
             ->will($this->returnValue($errors));
-    
+
         // Execute
         $result = $this->testObject->getErrors();
-    
+
         // Assert Result
         $this->assertEquals($expectedErrors, $result);
     }
@@ -150,14 +150,14 @@ class ValidationResultProcessorTest extends PHPUnit_Framework_TestCase
                 'min' => 'whatever'
             ]
         ];
-        
+
         $this->testObject->fieldsErrorBag->expects($this->atleastOnce())
             ->method('getErrorMessages')
             ->will($this->returnValue($errors));
 
         // Execute
         $result = $this->testObject->getRawErrors();
-    
+
         // Assert Result
         $this->assertEquals($errors, $result);
     }
@@ -182,14 +182,14 @@ class ValidationResultProcessorTest extends PHPUnit_Framework_TestCase
             'bad username',
             'whatever'
         ];
-        
+
         $this->testObject->fieldsErrorBag->expects($this->atleastOnce())
             ->method('getErrorMessages')
             ->will($this->returnValue($errors));
 
         // Execute
         $result = $this->testObject->firsts();
-    
+
         // Assert Result
         $this->assertEquals($expectedErrors, $result);
     }
@@ -215,10 +215,10 @@ class ValidationResultProcessorTest extends PHPUnit_Framework_TestCase
         $this->testObject->fieldsErrorBag->expects($this->exactly(2))
             ->method('getErrorMessages')
             ->will($this->returnValue($errors));
-    
+
         // Execute
         $result = $this->testObject->first($field);
-    
+
         // Assert Result
         $this->assertEquals('bad username', $result);
     }
@@ -246,10 +246,10 @@ class ValidationResultProcessorTest extends PHPUnit_Framework_TestCase
         $this->testObject->fieldsErrorBag->expects($this->exactly(2))
             ->method('getErrorMessages')
             ->will($this->returnValue($errors));
-    
+
         // Execute
         $result = $this->testObject->first();
-    
+
         // Assert Result
         $this->assertEquals($expectedErrors, $result);
     }
@@ -301,10 +301,10 @@ class ValidationResultProcessorTest extends PHPUnit_Framework_TestCase
         $instanceMock->expects($this->any())
             ->method('getRuleName')
             ->will($this->returnValue($ruleName));
-    
+
         // Execute
         $result = $this->testObject->chooseErrorMessage($instanceMock);
-    
+
         // Assert Result
         $this->assertInstanceOf(Helpers\ValidationResultProcessor::class, $result);
     }
@@ -319,7 +319,7 @@ class ValidationResultProcessorTest extends PHPUnit_Framework_TestCase
             ->method('setField')
             ->with('bla')
             ->will($this->returnSelf());
-    
+
         // Execute
         $this->testObject->bla;
     }

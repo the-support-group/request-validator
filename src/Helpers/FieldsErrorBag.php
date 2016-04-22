@@ -8,7 +8,6 @@
  *
  * @link: https://github.com/progsmile/request-validator
  */
-
 namespace TheSupportGroup\Common\Validator\Helpers;
 
 use TheSupportGroup\Common\Validator\Contracts\Helpers\FieldsErrorBagInterface;
@@ -17,9 +16,6 @@ class FieldsErrorBag implements FieldsErrorBagInterface
 {
     /** @var string magic field name */
     private $fieldName = '';
-
-    /** @var ValidationResultProcessor error bag */
-    private $errorBag = null;
 
     /** @var array out error messages */
     private $errorMessages = [];
@@ -50,7 +46,7 @@ class FieldsErrorBag implements FieldsErrorBagInterface
     }
 
     /**
-     * setErrorMessages
+     * setErrorMessages.
      *
      * @return $this
      */

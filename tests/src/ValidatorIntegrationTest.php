@@ -2,13 +2,10 @@
 
 namespace TheSupportGroup\Common\ValidatorTests;
 
-use TheSupportGroup\Common\Validator\Validator;
-use TheSupportGroup\Common\Validator\Helpers\ValidatorFacade;
-use TheSupportGroup\Common\Validator\Helpers;
 use PHPUnit_Framework_TestCase;
-use Respect\Validation\Validatable;
 use TheSupportGroup\Common\ValidationAdaptor\ValidationAdaptor;
-use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
+use TheSupportGroup\Common\Validator\Helpers;
+use TheSupportGroup\Common\Validator\Helpers\ValidatorFacade;
 
 class ValidatorIntegrationTest extends PHPUnit_Framework_TestCase
 {
@@ -16,11 +13,6 @@ class ValidatorIntegrationTest extends PHPUnit_Framework_TestCase
      * The validation facade.
      */
     private $validationFacade = null;
-
-    /**
-     * The object to be tested.
-     */
-    private $testObject;
 
     /**
      * Set up the testing object.
@@ -72,7 +64,7 @@ class ValidatorIntegrationTest extends PHPUnit_Framework_TestCase
             'json'                => 'json',
             'site'                => 'url'
         ];
-        
+
         $validationResult = $this->validationFacade->validate($inputData, $rules);
 
         $this->assertTrue(count($validationResult->getErrors()) == 0);
@@ -103,7 +95,7 @@ class ValidatorIntegrationTest extends PHPUnit_Framework_TestCase
         $errorMessages = [
             'age.min' => $errorMessage
         ];
-        
+
         $validationResult = $this->validationFacade->validate($inputData, $rules, $errorMessages);
 
         $this->assertTrue(count($validationResult->getErrors()) == 1);

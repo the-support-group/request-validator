@@ -30,10 +30,10 @@ class FieldsErrorBagTest extends PHPUnit_Framework_TestCase
             'first' => 'this is a message',
             'second' => 'this is the second message'
         ];
-    
+
         // Execute
         $this->testObject->setUserMessages($messages);
-    
+
         // Assert Result
         $this->assertEquals($this->testObject->getUserMessages(), $messages);
     }
@@ -42,13 +42,13 @@ class FieldsErrorBagTest extends PHPUnit_Framework_TestCase
      * testGetErrorMessages Test that getErrorMessages executes as expected.
      */
     public function testGetErrorMessages()
-    {    
+    {
         // Prepare / Mock
         $this->testObject->setErrorMessages(['asdfsf']);
 
         // Execute
         $result = $this->testObject->getErrorMessages();
-    
+
         // Assert Result
         $this->assertEquals(['asdfsf'], $result);
     }
@@ -60,10 +60,10 @@ class FieldsErrorBagTest extends PHPUnit_Framework_TestCase
     {
         // Prepare / Mock
         $this->testObject->setErrorMessages(['asdfsf']);
-    
+
         // Execute
         $result = $this->testObject->clear();
-    
+
         // Assert Result
         $this->assertEquals(null, $result);
     }
@@ -76,10 +76,10 @@ class FieldsErrorBagTest extends PHPUnit_Framework_TestCase
         // Prepare / Mock
         $fieldName = 'firstname';
         $message = 'This field is too long';
-    
+
         // Execute
         $result = $this->testObject->add($fieldName, $message);
-    
+
         // Assert Result
         $this->assertInstanceOf(FieldsErrorBag::class, $result);
         $this->assertEquals($message, $this->testObject->getErrorMessages()['firstname'][0]);
@@ -92,10 +92,10 @@ class FieldsErrorBagTest extends PHPUnit_Framework_TestCase
     {
         // Prepare / Mock
         $fieldName = 'lastname';
-    
+
         // Execute
         $result = $this->testObject->setField($fieldName);
-    
+
         // Assert Result
         $this->assertInstanceOf(FieldsErrorBag::class, $result);
         $this->assertEquals($fieldName, $result->getFieldName());

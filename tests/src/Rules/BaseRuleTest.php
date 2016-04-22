@@ -5,7 +5,6 @@ namespace TheSupportGroup\Common\ValidatorTests\Rules;
 use PHPUnit_Framework_TestCase;
 use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
 use TheSupportGroup\Common\Validator\Rules\BaseRule;
-use TheSupportGroup\Common\Validator\Helpers\ValidationResultProcessor;
 
 class BaseRuleTest extends PHPUnit_Framework_TestCase
 {
@@ -61,10 +60,10 @@ class BaseRuleTest extends PHPUnit_Framework_TestCase
             ->method('rule')
             ->with('randomizer', [$params])
             ->will($this->returnSelf());
-    
+
         // Execute
         $result = $this->testObject->randomizer($params);
-    
+
         // Assert Result
         $this->assertInstanceOf(BaseRule::class, $result);
     }
@@ -129,10 +128,10 @@ class BaseRuleTest extends PHPUnit_Framework_TestCase
     public function testGetRuleName()
     {
         $this->testObject->alpha();
-    
+
         // Execute
         $result = $this->testObject->getRuleName();
-    
+
         // Assert Result
         $this->assertEquals('BaseRuleTestClass', $result);
     }

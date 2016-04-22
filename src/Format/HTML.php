@@ -12,7 +12,7 @@ class HTML implements FormatInterface
 
         $ul = "<ul>\n%s</ul>";
 
-        foreach ($messages as $field => $message) {
+        foreach ($messages as $message) {
             foreach ($message as $content) {
                 $li = "<li>%s</li>\n";
 

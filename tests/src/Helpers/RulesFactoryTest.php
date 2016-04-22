@@ -3,9 +3,9 @@
 namespace TheSupportGroup\Common\ValidatorTests\Helpers;
 
 use PHPUnit_Framework_TestCase;
-use TheSupportGroup\Common\Validator\Rules\BaseRule;
-use TheSupportGroup\Common\Validator\Helpers\RulesFactory;
 use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
+use TheSupportGroup\Common\Validator\Helpers\RulesFactory;
+use TheSupportGroup\Common\Validator\Rules\BaseRule;
 
 class RulesFactoryTest extends PHPUnit_Framework_TestCase
 {
@@ -24,7 +24,7 @@ class RulesFactoryTest extends PHPUnit_Framework_TestCase
             ->getMock();
 
         $rulesFactory = new RulesFactory();
-    
+
         // Execute
         $result = $rulesFactory->createRule(
             $ruleName,
@@ -32,7 +32,7 @@ class RulesFactoryTest extends PHPUnit_Framework_TestCase
             $params,
             $validationProviderMock
         );
-    
+
         // Assert Result
         $this->assertInstanceOf(BaseRule::class, $result);
     }

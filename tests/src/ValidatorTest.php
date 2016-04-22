@@ -2,13 +2,12 @@
 
 namespace TheSupportGroup\Common\ValidatorTests;
 
-use TheSupportGroup\Common\Validator\Validator;
-use TheSupportGroup\Common\Validator\Helpers;
-use TheSupportGroup\Common\Validator\Rules;
 use PHPUnit_Framework_TestCase;
 use Respect\Validation\Validatable;
 use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
 use TheSupportGroup\Common\Validator\Contracts\Helpers as Contracts;
+use TheSupportGroup\Common\Validator\Helpers;
+use TheSupportGroup\Common\Validator\Rules;
 
 class ValidatorTest extends PHPUnit_Framework_TestCase
 {
@@ -36,11 +35,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      * The rules factory mock.
      */
     private $rulesFactoryMock;
-
-    /**
-     * The object to be tested.
-     */
-    private $testObject;
 
     /**
      * Set up the testing object.
