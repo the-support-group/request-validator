@@ -8,7 +8,6 @@
  *
  * @link: https://github.com/progsmile/request-validator
  */
-
 namespace TheSupportGroup\Common\Validator;
 
 use TheSupportGroup\Common\ValidationInterop\ValidationProviderInterface;
@@ -158,7 +157,7 @@ final class Validator
      *
      * @param array $data
      *
-     * @return string
+     * @return array
      */
     private function prepareData(array $data)
     {

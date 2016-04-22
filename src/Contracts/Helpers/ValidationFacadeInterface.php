@@ -10,7 +10,6 @@ interface ValidationFacadeInterface
      * @param ValidationProviderInterface $validationProvider
      * @param ValidationResultProcessorInterface $validationResultProcessor
      * @param RulesFactoryInterface $rulesFactory
-     * @return void
      */
     public function __construct(
         ValidationProviderInterface $validationProvider,
